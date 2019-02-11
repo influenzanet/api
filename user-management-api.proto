@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package influenzanet.user_management_api;
+option go_package = "github.com/Influenzanet/api/user-management";
+
+import "global-types.proto";
+import "google/protobuf/empty.proto";
+
+
+message User {
+
+}
+
+message UserReference {
+    influenzanet.ParsedToken auth = 1;
+    string user_id = 2;
+}
+
+service UserManagementApi {
+    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+
+    // Auth and Token handling:
+    rpc Login(influenzanet.UserCredentials) returns (User);
+
+    // TODO:
+}

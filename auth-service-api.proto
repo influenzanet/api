@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package influenzanet.auth_service_api;
+option go_package = "github.com/Influenzanet/api/auth-service";
+
+import "global-types.proto";
+import "google/protobuf/empty.proto";
+
+message EncodedToken {
+    string token = 1;
+}
+
+service AuthServiceApi {
+    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+
+    // Auth and Token handling:
+    rpc Login(influenzanet.UserCredentials) returns (EncodedToken);
+
+    // TODO:
+}
