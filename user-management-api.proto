@@ -7,8 +7,16 @@ import "global-types.proto";
 import "google/protobuf/empty.proto";
 
 
-message User {
+message NewUser {
+    string email = 1;
+    string password = 2;
+    repeated string roles = 3;
+}
 
+message UserAuthInfo {
+    string user_id = 1;
+    repeated string roles = 2;
+    string authenticated_role = 3;
 }
 
 message UserReference {
@@ -16,11 +24,19 @@ message UserReference {
     string user_id = 2;
 }
 
+message PasswordChangeMsg {
+    influenzanet.ParsedToken auth = 1;
+    string user_id = 2;
+    string old_password = 3;
+    string new_password = 4;
+}
+
 service UserManagementApi {
     rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
 
     // Auth and Token handling:
-    rpc Login(influenzanet.UserCredentials) returns (User);
+    rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
+    rpc SignupWithEmail(NewUser) returns (UserAuthInfo);
 
-    // TODO:
+    rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
 }
