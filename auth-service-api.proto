@@ -13,8 +13,11 @@ message EncodedToken {
 service AuthServiceApi {
     rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
 
-    // Auth and Token handling:
+    // Auth:
     rpc Login(influenzanet.UserCredentials) returns (EncodedToken);
+    rpc Signup(influenzanet.UserCredentials) returns (EncodedToken);
 
-    // TODO:
+    // Token handling:
+    rpc ValidateJWT(EncodedToken) returns (influenzanet.ParsedToken);
+    rpc RenewJWT(EncodedToken) returns (EncodedToken);
 }
