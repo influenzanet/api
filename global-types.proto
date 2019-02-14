@@ -9,7 +9,7 @@ option go_package = "github.com/Influenzanet/api";
 */
 
 message UserCredentials {
-    string username = 1;
+    string email = 1;
     string password = 2;
     string login_role = 3; // e.g. user wants to login as a researcher
 }
