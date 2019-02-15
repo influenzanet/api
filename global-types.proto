@@ -1,13 +1,12 @@
 syntax = "proto3";
 
 package influenzanet;
-option go_package = "github.com/Influenzanet/api";
+option go_package = "github.com/Influenzanet/api/go";
 
 
 /*
  * Authentication types used in multiple services
 */
-
 message UserCredentials {
     string email = 1;
     string password = 2;
