@@ -30,9 +30,8 @@ message UserReference {
 
 message PasswordChangeMsg {
     influenzanet.ParsedToken auth = 1;
-    string user_id = 2;
-    string old_password = 3;
-    string new_password = 4;
+    string old_password = 2;
+    string new_password = 3;
 }
 
 service UserManagementApi {
