@@ -1,4 +1,4 @@
-# Influenzanet backend services APIs 
+# Influenzanet backend services APIs
 
 ## Getting started
 gRPC API definitions

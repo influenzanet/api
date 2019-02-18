@@ -1,14 +1,13 @@
 .PHONY: deploy install-go
-VERSION = v1.0.0
 
-deploy:
-	if [ ! -d "dist" ]; then mkdir "dist"; else rm -rf "dist" &&  mkdir "dist"; fi
-	cd dist && mkdir "github.com" && cd github.com && mkdir "Influenzanet" && cd Influenzanet && git clone https://github.com/Influenzanet/api.git
-	protoc global-types.proto --go_out=plugins=grpc:dist
-	protoc user-management-api.proto --go_out=plugins=grpc:dist
-	protoc auth-service-api.proto --go_out=plugins=grpc:dist
-	cd dist/github.com/Influenzanet/api && git add . && git commit -m "update api files"
-	-cd dist/github.com/Influenzanet/api && git push --delete origin $(VERSION) && git tag --delete $(VERSION)
-	cd dist/github.com/Influenzanet/api && git tag $(VERSION) && git push origin master && git push origin $(VERSION)
-install-go:
-	go get -u github.com/Influenzanet/api/go
+BUILD_DIR = ./temp
+DIST_DIR = ./dist
+
+all:
+	if [ ! -d "$(BUILD_DIR)" ]; then mkdir "$(BUILD_DIR)"; else rm -rf "$(BUILD_DIR)" &&  mkdir "$(BUILD_DIR)"; fi
+	protoc global-types.proto --go_out=plugins=grpc:$(BUILD_DIR)
+	protoc user-management-api.proto --go_out=plugins=grpc:"$(BUILD_DIR)"
+	protoc auth-service-api.proto --go_out=plugins=grpc:"$(BUILD_DIR)"
+	if [ ! -d "$(DIST_DIR)" ]; then mkdir "$(DIST_DIR)"; else rm -rf "$(DIST_DIR)" &&  mkdir "$(DIST_DIR)"; fi
+	cp -R $(BUILD_DIR)/github.com/Influenzanet/api/dist/ $(DIST_DIR)
+	rm -rf $(BUILD_DIR)

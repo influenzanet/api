@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package influenzanet;
-option go_package = "github.com/Influenzanet/api/go";
+option go_package = "github.com/Influenzanet/api/dist/go";
 
 
 /*

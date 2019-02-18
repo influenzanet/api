@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package influenzanet.auth_service_api;
-option go_package = "github.com/Influenzanet/api/go/auth-service";
+option go_package = "github.com/Influenzanet/api/dist/go/auth-service";
 
 import "global-types.proto";
 import "google/protobuf/empty.proto";
