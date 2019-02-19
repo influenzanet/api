@@ -12,15 +12,14 @@ message Profile {
 }
 
 message NewUser {
-    string email = 1;
-    string password = 2;
-    Profile profile = 3;
+    influenzanet.UserCredentials auth = 1;
+    Profile profile = 2;
 }
 
 message UserAuthInfo {
     string user_id = 1;
     repeated string roles = 2;
-    string authenticated_role = 3;
+    string instance_id = 3;
 }
 
 message UserReference {
