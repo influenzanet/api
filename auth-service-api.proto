@@ -4,6 +4,7 @@ package influenzanet.auth_service_api;
 option go_package = "github.com/Influenzanet/api/dist/go/auth-service";
 
 import "global-types.proto";
+import "user-management-api.proto";
 import "google/protobuf/empty.proto";
 
 message EncodedToken {
@@ -14,8 +15,8 @@ service AuthServiceApi {
     rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
 
     // Auth:
-    rpc Login(influenzanet.UserCredentials) returns (EncodedToken);
-    rpc Signup(influenzanet.UserCredentials) returns (EncodedToken);
+    rpc LoginWithEmail(influenzanet.UserCredentials) returns (EncodedToken);
+    rpc SignupWithEmail(influenzanet.user_management_api.NewUser) returns (EncodedToken);
 
     // Token handling:
     rpc ValidateJWT(EncodedToken) returns (influenzanet.ParsedToken);
