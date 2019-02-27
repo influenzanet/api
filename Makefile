@@ -9,5 +9,5 @@ all:
 	protoc user-management-api.proto --go_out=plugins=grpc:"$(BUILD_DIR)"
 	protoc auth-service-api.proto --go_out=plugins=grpc:"$(BUILD_DIR)"
 	if [ ! -d "$(DIST_DIR)" ]; then mkdir "$(DIST_DIR)"; else rm -rf "$(DIST_DIR)" &&  mkdir "$(DIST_DIR)"; fi
-	cp -R $(BUILD_DIR)/github.com/Influenzanet/api/dist/ $(DIST_DIR)
+	cp -R $(BUILD_DIR)/github.com/influenzanet/api/dist/ $(DIST_DIR)
 	rm -rf $(BUILD_DIR)
