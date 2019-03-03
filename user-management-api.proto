@@ -40,5 +40,8 @@ service UserManagementApi {
     rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
     rpc SignupWithEmail(NewUser) returns (UserAuthInfo);
 
+    // Notify User management when token refreshed
+    rpc TokenRefreshed(UserReference) returns (influenzanet.Status);
+
     rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
 }
