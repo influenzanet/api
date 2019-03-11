@@ -1,5 +1,3 @@
-.PHONY: deploy install-go
-
 BUILD_DIR = ./temp
 DIST_DIR = ./dist
 
