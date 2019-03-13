@@ -24,6 +24,226 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type User struct {
+	Id                   string        `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Account              *User_Account `protobuf:"bytes,2,opt,name=account,proto3" json:"account,omitempty"`
+	Profile              *Profile      `protobuf:"bytes,3,opt,name=profile,proto3" json:"profile,omitempty"`
+	SubProfiles          []*SubProfile `protobuf:"bytes,4,rep,name=sub_profiles,json=subProfiles,proto3" json:"sub_profiles,omitempty"`
+	Infos                *User_Infos   `protobuf:"bytes,5,opt,name=infos,proto3" json:"infos,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
+	XXX_unrecognized     []byte        `json:"-"`
+	XXX_sizecache        int32         `json:"-"`
+}
+
+func (m *User) Reset()         { *m = User{} }
+func (m *User) String() string { return proto.CompactTextString(m) }
+func (*User) ProtoMessage()    {}
+func (*User) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{0}
+}
+
+func (m *User) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_User.Unmarshal(m, b)
+}
+func (m *User) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_User.Marshal(b, m, deterministic)
+}
+func (m *User) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_User.Merge(m, src)
+}
+func (m *User) XXX_Size() int {
+	return xxx_messageInfo_User.Size(m)
+}
+func (m *User) XXX_DiscardUnknown() {
+	xxx_messageInfo_User.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_User proto.InternalMessageInfo
+
+func (m *User) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *User) GetAccount() *User_Account {
+	if m != nil {
+		return m.Account
+	}
+	return nil
+}
+
+func (m *User) GetProfile() *Profile {
+	if m != nil {
+		return m.Profile
+	}
+	return nil
+}
+
+func (m *User) GetSubProfiles() []*SubProfile {
+	if m != nil {
+		return m.SubProfiles
+	}
+	return nil
+}
+
+func (m *User) GetInfos() *User_Infos {
+	if m != nil {
+		return m.Infos
+	}
+	return nil
+}
+
+type User_Account struct {
+	Email                string   `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *User_Account) Reset()         { *m = User_Account{} }
+func (m *User_Account) String() string { return proto.CompactTextString(m) }
+func (*User_Account) ProtoMessage()    {}
+func (*User_Account) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{0, 0}
+}
+
+func (m *User_Account) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_User_Account.Unmarshal(m, b)
+}
+func (m *User_Account) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_User_Account.Marshal(b, m, deterministic)
+}
+func (m *User_Account) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_User_Account.Merge(m, src)
+}
+func (m *User_Account) XXX_Size() int {
+	return xxx_messageInfo_User_Account.Size(m)
+}
+func (m *User_Account) XXX_DiscardUnknown() {
+	xxx_messageInfo_User_Account.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_User_Account proto.InternalMessageInfo
+
+func (m *User_Account) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+type User_Infos struct {
+	CreatedAt            int64    `protobuf:"varint,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            int64    `protobuf:"varint,2,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	LastLogin            int64    `protobuf:"varint,3,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
+	LastTokenRefresh     int64    `protobuf:"varint,4,opt,name=last_token_refresh,json=lastTokenRefresh,proto3" json:"last_token_refresh,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *User_Infos) Reset()         { *m = User_Infos{} }
+func (m *User_Infos) String() string { return proto.CompactTextString(m) }
+func (*User_Infos) ProtoMessage()    {}
+func (*User_Infos) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{0, 1}
+}
+
+func (m *User_Infos) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_User_Infos.Unmarshal(m, b)
+}
+func (m *User_Infos) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_User_Infos.Marshal(b, m, deterministic)
+}
+func (m *User_Infos) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_User_Infos.Merge(m, src)
+}
+func (m *User_Infos) XXX_Size() int {
+	return xxx_messageInfo_User_Infos.Size(m)
+}
+func (m *User_Infos) XXX_DiscardUnknown() {
+	xxx_messageInfo_User_Infos.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_User_Infos proto.InternalMessageInfo
+
+func (m *User_Infos) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *User_Infos) GetUpdatedAt() int64 {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return 0
+}
+
+func (m *User_Infos) GetLastLogin() int64 {
+	if m != nil {
+		return m.LastLogin
+	}
+	return 0
+}
+
+func (m *User_Infos) GetLastTokenRefresh() int64 {
+	if m != nil {
+		return m.LastTokenRefresh
+	}
+	return 0
+}
+
+type UserReference struct {
+	Auth                 *_go.ParsedToken `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
+	UserId               string           `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *UserReference) Reset()         { *m = UserReference{} }
+func (m *UserReference) String() string { return proto.CompactTextString(m) }
+func (*UserReference) ProtoMessage()    {}
+func (*UserReference) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{1}
+}
+
+func (m *UserReference) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UserReference.Unmarshal(m, b)
+}
+func (m *UserReference) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UserReference.Marshal(b, m, deterministic)
+}
+func (m *UserReference) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserReference.Merge(m, src)
+}
+func (m *UserReference) XXX_Size() int {
+	return xxx_messageInfo_UserReference.Size(m)
+}
+func (m *UserReference) XXX_DiscardUnknown() {
+	xxx_messageInfo_UserReference.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UserReference proto.InternalMessageInfo
+
+func (m *UserReference) GetAuth() *_go.ParsedToken {
+	if m != nil {
+		return m.Auth
+	}
+	return nil
+}
+
+func (m *UserReference) GetUserId() string {
+	if m != nil {
+		return m.UserId
+	}
+	return ""
+}
+
 type Profile struct {
 	Gender               string   `protobuf:"bytes,1,opt,name=gender,proto3" json:"gender,omitempty"`
 	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
@@ -38,7 +258,7 @@ func (m *Profile) Reset()         { *m = Profile{} }
 func (m *Profile) String() string { return proto.CompactTextString(m) }
 func (*Profile) ProtoMessage()    {}
 func (*Profile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_23188efcd8e5ff27, []int{0}
+	return fileDescriptor_23188efcd8e5ff27, []int{2}
 }
 
 func (m *Profile) XXX_Unmarshal(b []byte) error {
@@ -87,7 +307,109 @@ func (m *Profile) GetLastName() string {
 	return ""
 }
 
-type NewUser struct {
+type SubProfile struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	BirthYear            int32    `protobuf:"varint,3,opt,name=birth_year,json=birthYear,proto3" json:"birth_year,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SubProfile) Reset()         { *m = SubProfile{} }
+func (m *SubProfile) String() string { return proto.CompactTextString(m) }
+func (*SubProfile) ProtoMessage()    {}
+func (*SubProfile) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{3}
+}
+
+func (m *SubProfile) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SubProfile.Unmarshal(m, b)
+}
+func (m *SubProfile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SubProfile.Marshal(b, m, deterministic)
+}
+func (m *SubProfile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubProfile.Merge(m, src)
+}
+func (m *SubProfile) XXX_Size() int {
+	return xxx_messageInfo_SubProfile.Size(m)
+}
+func (m *SubProfile) XXX_DiscardUnknown() {
+	xxx_messageInfo_SubProfile.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SubProfile proto.InternalMessageInfo
+
+func (m *SubProfile) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *SubProfile) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *SubProfile) GetBirthYear() int32 {
+	if m != nil {
+		return m.BirthYear
+	}
+	return 0
+}
+
+type SubProfileRequest struct {
+	Auth                 *_go.UserCredentials `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
+	SubProfile           *SubProfile          `protobuf:"bytes,2,opt,name=sub_profile,json=subProfile,proto3" json:"sub_profile,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *SubProfileRequest) Reset()         { *m = SubProfileRequest{} }
+func (m *SubProfileRequest) String() string { return proto.CompactTextString(m) }
+func (*SubProfileRequest) ProtoMessage()    {}
+func (*SubProfileRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{4}
+}
+
+func (m *SubProfileRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SubProfileRequest.Unmarshal(m, b)
+}
+func (m *SubProfileRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SubProfileRequest.Marshal(b, m, deterministic)
+}
+func (m *SubProfileRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SubProfileRequest.Merge(m, src)
+}
+func (m *SubProfileRequest) XXX_Size() int {
+	return xxx_messageInfo_SubProfileRequest.Size(m)
+}
+func (m *SubProfileRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_SubProfileRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SubProfileRequest proto.InternalMessageInfo
+
+func (m *SubProfileRequest) GetAuth() *_go.UserCredentials {
+	if m != nil {
+		return m.Auth
+	}
+	return nil
+}
+
+func (m *SubProfileRequest) GetSubProfile() *SubProfile {
+	if m != nil {
+		return m.SubProfile
+	}
+	return nil
+}
+
+type ProfileRequest struct {
 	Auth                 *_go.UserCredentials `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
 	Profile              *Profile             `protobuf:"bytes,2,opt,name=profile,proto3" json:"profile,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
@@ -95,39 +417,39 @@ type NewUser struct {
 	XXX_sizecache        int32                `json:"-"`
 }
 
-func (m *NewUser) Reset()         { *m = NewUser{} }
-func (m *NewUser) String() string { return proto.CompactTextString(m) }
-func (*NewUser) ProtoMessage()    {}
-func (*NewUser) Descriptor() ([]byte, []int) {
-	return fileDescriptor_23188efcd8e5ff27, []int{1}
+func (m *ProfileRequest) Reset()         { *m = ProfileRequest{} }
+func (m *ProfileRequest) String() string { return proto.CompactTextString(m) }
+func (*ProfileRequest) ProtoMessage()    {}
+func (*ProfileRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{5}
 }
 
-func (m *NewUser) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NewUser.Unmarshal(m, b)
+func (m *ProfileRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ProfileRequest.Unmarshal(m, b)
 }
-func (m *NewUser) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NewUser.Marshal(b, m, deterministic)
+func (m *ProfileRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ProfileRequest.Marshal(b, m, deterministic)
 }
-func (m *NewUser) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NewUser.Merge(m, src)
+func (m *ProfileRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProfileRequest.Merge(m, src)
 }
-func (m *NewUser) XXX_Size() int {
-	return xxx_messageInfo_NewUser.Size(m)
+func (m *ProfileRequest) XXX_Size() int {
+	return xxx_messageInfo_ProfileRequest.Size(m)
 }
-func (m *NewUser) XXX_DiscardUnknown() {
-	xxx_messageInfo_NewUser.DiscardUnknown(m)
+func (m *ProfileRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProfileRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NewUser proto.InternalMessageInfo
+var xxx_messageInfo_ProfileRequest proto.InternalMessageInfo
 
-func (m *NewUser) GetAuth() *_go.UserCredentials {
+func (m *ProfileRequest) GetAuth() *_go.UserCredentials {
 	if m != nil {
 		return m.Auth
 	}
 	return nil
 }
 
-func (m *NewUser) GetProfile() *Profile {
+func (m *ProfileRequest) GetProfile() *Profile {
 	if m != nil {
 		return m.Profile
 	}
@@ -147,7 +469,7 @@ func (m *UserAuthInfo) Reset()         { *m = UserAuthInfo{} }
 func (m *UserAuthInfo) String() string { return proto.CompactTextString(m) }
 func (*UserAuthInfo) ProtoMessage()    {}
 func (*UserAuthInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_23188efcd8e5ff27, []int{2}
+	return fileDescriptor_23188efcd8e5ff27, []int{6}
 }
 
 func (m *UserAuthInfo) XXX_Unmarshal(b []byte) error {
@@ -189,53 +511,6 @@ func (m *UserAuthInfo) GetInstanceId() string {
 	return ""
 }
 
-type UserReference struct {
-	Auth                 *_go.ParsedToken `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
-	UserId               string           `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
-	XXX_unrecognized     []byte           `json:"-"`
-	XXX_sizecache        int32            `json:"-"`
-}
-
-func (m *UserReference) Reset()         { *m = UserReference{} }
-func (m *UserReference) String() string { return proto.CompactTextString(m) }
-func (*UserReference) ProtoMessage()    {}
-func (*UserReference) Descriptor() ([]byte, []int) {
-	return fileDescriptor_23188efcd8e5ff27, []int{3}
-}
-
-func (m *UserReference) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UserReference.Unmarshal(m, b)
-}
-func (m *UserReference) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UserReference.Marshal(b, m, deterministic)
-}
-func (m *UserReference) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UserReference.Merge(m, src)
-}
-func (m *UserReference) XXX_Size() int {
-	return xxx_messageInfo_UserReference.Size(m)
-}
-func (m *UserReference) XXX_DiscardUnknown() {
-	xxx_messageInfo_UserReference.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UserReference proto.InternalMessageInfo
-
-func (m *UserReference) GetAuth() *_go.ParsedToken {
-	if m != nil {
-		return m.Auth
-	}
-	return nil
-}
-
-func (m *UserReference) GetUserId() string {
-	if m != nil {
-		return m.UserId
-	}
-	return ""
-}
-
 type PasswordChangeMsg struct {
 	Auth                 *_go.ParsedToken `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
 	OldPassword          string           `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
@@ -249,7 +524,7 @@ func (m *PasswordChangeMsg) Reset()         { *m = PasswordChangeMsg{} }
 func (m *PasswordChangeMsg) String() string { return proto.CompactTextString(m) }
 func (*PasswordChangeMsg) ProtoMessage()    {}
 func (*PasswordChangeMsg) Descriptor() ([]byte, []int) {
-	return fileDescriptor_23188efcd8e5ff27, []int{4}
+	return fileDescriptor_23188efcd8e5ff27, []int{7}
 }
 
 func (m *PasswordChangeMsg) XXX_Unmarshal(b []byte) error {
@@ -291,52 +566,125 @@ func (m *PasswordChangeMsg) GetNewPassword() string {
 	return ""
 }
 
+type EmailChangeMsg struct {
+	Auth                 *_go.ParsedToken `protobuf:"bytes,1,opt,name=auth,proto3" json:"auth,omitempty"`
+	NewEmail             string           `protobuf:"bytes,2,opt,name=new_email,json=newEmail,proto3" json:"new_email,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *EmailChangeMsg) Reset()         { *m = EmailChangeMsg{} }
+func (m *EmailChangeMsg) String() string { return proto.CompactTextString(m) }
+func (*EmailChangeMsg) ProtoMessage()    {}
+func (*EmailChangeMsg) Descriptor() ([]byte, []int) {
+	return fileDescriptor_23188efcd8e5ff27, []int{8}
+}
+
+func (m *EmailChangeMsg) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EmailChangeMsg.Unmarshal(m, b)
+}
+func (m *EmailChangeMsg) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EmailChangeMsg.Marshal(b, m, deterministic)
+}
+func (m *EmailChangeMsg) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EmailChangeMsg.Merge(m, src)
+}
+func (m *EmailChangeMsg) XXX_Size() int {
+	return xxx_messageInfo_EmailChangeMsg.Size(m)
+}
+func (m *EmailChangeMsg) XXX_DiscardUnknown() {
+	xxx_messageInfo_EmailChangeMsg.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EmailChangeMsg proto.InternalMessageInfo
+
+func (m *EmailChangeMsg) GetAuth() *_go.ParsedToken {
+	if m != nil {
+		return m.Auth
+	}
+	return nil
+}
+
+func (m *EmailChangeMsg) GetNewEmail() string {
+	if m != nil {
+		return m.NewEmail
+	}
+	return ""
+}
+
 func init() {
-	proto.RegisterType((*Profile)(nil), "influenzanet.user_management_api.Profile")
-	proto.RegisterType((*NewUser)(nil), "influenzanet.user_management_api.NewUser")
-	proto.RegisterType((*UserAuthInfo)(nil), "influenzanet.user_management_api.UserAuthInfo")
+	proto.RegisterType((*User)(nil), "influenzanet.user_management_api.User")
+	proto.RegisterType((*User_Account)(nil), "influenzanet.user_management_api.User.Account")
+	proto.RegisterType((*User_Infos)(nil), "influenzanet.user_management_api.User.Infos")
 	proto.RegisterType((*UserReference)(nil), "influenzanet.user_management_api.UserReference")
+	proto.RegisterType((*Profile)(nil), "influenzanet.user_management_api.Profile")
+	proto.RegisterType((*SubProfile)(nil), "influenzanet.user_management_api.SubProfile")
+	proto.RegisterType((*SubProfileRequest)(nil), "influenzanet.user_management_api.SubProfileRequest")
+	proto.RegisterType((*ProfileRequest)(nil), "influenzanet.user_management_api.ProfileRequest")
+	proto.RegisterType((*UserAuthInfo)(nil), "influenzanet.user_management_api.UserAuthInfo")
 	proto.RegisterType((*PasswordChangeMsg)(nil), "influenzanet.user_management_api.PasswordChangeMsg")
+	proto.RegisterType((*EmailChangeMsg)(nil), "influenzanet.user_management_api.EmailChangeMsg")
 }
 
 func init() { proto.RegisterFile("user-management-api.proto", fileDescriptor_23188efcd8e5ff27) }
 
 var fileDescriptor_23188efcd8e5ff27 = []byte{
-	// 538 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4d, 0x6f, 0x13, 0x31,
-	0x10, 0x55, 0x9a, 0x92, 0x90, 0x49, 0x09, 0xaa, 0x55, 0x95, 0x34, 0x55, 0x45, 0xc8, 0x09, 0x0e,
-	0xd9, 0x15, 0x89, 0xe0, 0x5e, 0xa2, 0x1e, 0x22, 0xd1, 0x2a, 0x4a, 0x41, 0x91, 0x40, 0x22, 0x72,
-	0xb2, 0xb3, 0xbb, 0x16, 0x5e, 0x7b, 0x65, 0x7b, 0x15, 0x95, 0x1b, 0x37, 0x7e, 0x1e, 0x3f, 0x09,
-	0xd9, 0xbb, 0x9b, 0x8f, 0x0a, 0x68, 0x7a, 0x1c, 0xcf, 0x9b, 0x37, 0xf3, 0x66, 0x9e, 0x0c, 0x67,
-	0x99, 0x46, 0xd5, 0x4f, 0xa8, 0xa0, 0x11, 0x26, 0x28, 0x4c, 0x9f, 0xa6, 0xcc, 0x4b, 0x95, 0x34,
-	0x92, 0x74, 0x99, 0x08, 0x79, 0x86, 0xe2, 0x07, 0x15, 0x68, 0x3c, 0x8b, 0x9b, 0x6f, 0x70, 0x73,
-	0x9a, 0xb2, 0x0e, 0x89, 0xb8, 0x5c, 0x50, 0xde, 0x37, 0x77, 0x29, 0xea, 0xbc, 0xaa, 0x73, 0x1e,
-	0x49, 0x19, 0x71, 0xf4, 0x5d, 0xb4, 0xc8, 0x42, 0x1f, 0x93, 0xd4, 0xdc, 0xe5, 0xc9, 0x9e, 0x86,
-	0xfa, 0x44, 0xc9, 0x90, 0x71, 0x24, 0xa7, 0x50, 0x8b, 0x50, 0x04, 0xa8, 0xda, 0x95, 0x6e, 0xe5,
-	0x75, 0x63, 0x5a, 0x44, 0xe4, 0x04, 0x9e, 0x18, 0x66, 0x38, 0xb6, 0x0f, 0xdc, 0x73, 0x1e, 0x90,
-	0x0b, 0x80, 0x90, 0x29, 0x6d, 0xe6, 0x82, 0x26, 0xd8, 0xae, 0xba, 0x54, 0xc3, 0xbd, 0xdc, 0xd0,
-	0x04, 0xc9, 0x39, 0x34, 0x38, 0x2d, 0xb3, 0x87, 0x2e, 0xfb, 0xd4, 0x3e, 0xd8, 0x64, 0xef, 0x67,
-	0x05, 0xea, 0x37, 0xb8, 0xfa, 0xac, 0x51, 0x91, 0xb7, 0x70, 0x48, 0x33, 0x13, 0xbb, 0x9e, 0xcd,
-	0xc1, 0x85, 0xb7, 0x23, 0xd1, 0x22, 0x46, 0x0a, 0x03, 0x14, 0x86, 0x51, 0xae, 0xa7, 0x0e, 0x4a,
-	0x46, 0x50, 0x4f, 0xf3, 0x99, 0xdd, 0x48, 0xcd, 0xc1, 0x1b, 0xef, 0xa1, 0xc5, 0x78, 0x85, 0xc8,
-	0x69, 0x59, 0xd9, 0xfb, 0x06, 0x47, 0x96, 0xfd, 0x32, 0x33, 0xf1, 0x58, 0x84, 0x92, 0xbc, 0x80,
-	0xba, 0xab, 0x63, 0x41, 0x29, 0xdf, 0x86, 0xe3, 0xc0, 0xca, 0x57, 0x92, 0xa3, 0x6e, 0x1f, 0x74,
-	0xab, 0x56, 0xbe, 0x0b, 0xc8, 0x4b, 0x68, 0x32, 0xa1, 0x0d, 0x15, 0x4b, 0xb4, 0x25, 0xb9, 0x7e,
-	0x28, 0x9f, 0xc6, 0x41, 0x6f, 0x06, 0xcf, 0x2c, 0xff, 0x14, 0x43, 0x54, 0x28, 0x96, 0x48, 0xfa,
-	0x3b, 0x42, 0xcf, 0x76, 0x47, 0x9e, 0x50, 0xa5, 0x31, 0xf8, 0x24, 0xbf, 0xa3, 0x28, 0x44, 0x6e,
-	0xcd, 0x73, 0xb0, 0x3d, 0x4f, 0xef, 0x57, 0x05, 0x8e, 0x27, 0x54, 0xeb, 0x95, 0x54, 0xc1, 0x28,
-	0xa6, 0x22, 0xc2, 0x6b, 0x1d, 0x3d, 0x96, 0xfd, 0x15, 0x1c, 0x49, 0x1e, 0xcc, 0xd3, 0x82, 0xa7,
-	0x68, 0xd1, 0x94, 0x3c, 0x28, 0xa9, 0x2d, 0x44, 0xe0, 0x6a, 0x03, 0xc9, 0x25, 0x36, 0x05, 0xae,
-	0x4a, 0xc8, 0xe0, 0x77, 0x15, 0x8e, 0xad, 0xc8, 0xeb, 0xf5, 0xae, 0x2f, 0x53, 0x46, 0xde, 0x43,
-	0xed, 0xd6, 0x50, 0x93, 0x69, 0x72, 0xea, 0xe5, 0xd6, 0xf3, 0x4a, 0xeb, 0x79, 0x57, 0xd6, 0x7a,
-	0x9d, 0x93, 0xdd, 0xf1, 0x0a, 0xf4, 0x1c, 0x5a, 0x1f, 0x65, 0xc4, 0xc4, 0x8c, 0x99, 0xf8, 0x2a,
-	0xa1, 0x8c, 0x93, 0xff, 0xbb, 0xa1, 0xe3, 0x3d, 0x7c, 0xf6, 0x9d, 0x13, 0x73, 0x78, 0x7e, 0xcb,
-	0x22, 0x91, 0xa5, 0x9b, 0x0e, 0x7b, 0x38, 0xa7, 0x30, 0xea, 0xa3, 0xbb, 0xcd, 0xa0, 0x95, 0x6f,
-	0x1c, 0x43, 0x85, 0x3a, 0xc6, 0x80, 0xf8, 0xfb, 0x31, 0xac, 0x2d, 0xf3, 0x8f, 0x3d, 0x7d, 0x85,
-	0x56, 0x7e, 0xf7, 0xf5, 0xa9, 0x86, 0x7b, 0xf8, 0xff, 0xbe, 0x63, 0xfe, 0x4e, 0xfe, 0xe1, 0xdd,
-	0x97, 0x61, 0xc4, 0x4c, 0x9c, 0x2d, 0xbc, 0xa5, 0x4c, 0xfc, 0x6d, 0x84, 0x4f, 0x53, 0xe6, 0x07,
-	0x4c, 0x1b, 0x3f, 0x92, 0xfe, 0xbd, 0x3f, 0x6a, 0x51, 0x73, 0x17, 0x1e, 0xfe, 0x09, 0x00, 0x00,
-	0xff, 0xff, 0x21, 0x1b, 0x8f, 0x62, 0xbd, 0x04, 0x00, 0x00,
+	// 861 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0xdd, 0x6e, 0x1b, 0x45,
+	0x14, 0x96, 0xff, 0xe2, 0xfa, 0x6c, 0x6a, 0x9a, 0x51, 0x55, 0x5c, 0x47, 0x55, 0x8d, 0x2f, 0x50,
+	0x90, 0x92, 0x75, 0x49, 0x04, 0xf7, 0x6e, 0x54, 0x41, 0x24, 0x42, 0xa3, 0x35, 0x28, 0xe2, 0x47,
+	0x2c, 0xb3, 0x9e, 0xe3, 0xf5, 0x88, 0xf5, 0xcc, 0x32, 0x33, 0x4b, 0x14, 0x9e, 0x80, 0x6b, 0x24,
+	0xde, 0x8d, 0xc7, 0xe0, 0x11, 0xd0, 0xcc, 0xec, 0x3a, 0x76, 0x51, 0xb1, 0x1d, 0x44, 0xef, 0x3c,
+	0xe7, 0xe7, 0x3b, 0x73, 0xbe, 0xf9, 0xce, 0x59, 0xc3, 0xd3, 0x42, 0xa3, 0x3a, 0x59, 0x50, 0x41,
+	0x53, 0x5c, 0xa0, 0x30, 0x27, 0x34, 0xe7, 0x61, 0xae, 0xa4, 0x91, 0x64, 0xc0, 0xc5, 0x2c, 0x2b,
+	0x50, 0xfc, 0x4a, 0x05, 0x9a, 0xd0, 0xc6, 0xc5, 0x77, 0x71, 0x31, 0xcd, 0x79, 0x9f, 0xa4, 0x99,
+	0x4c, 0x68, 0x76, 0x62, 0x6e, 0x73, 0xd4, 0x3e, 0xab, 0x7f, 0x98, 0x4a, 0x99, 0x66, 0x38, 0x72,
+	0xa7, 0xa4, 0x98, 0x8d, 0x70, 0x91, 0x9b, 0x5b, 0xef, 0x1c, 0xfe, 0xd5, 0x80, 0xe6, 0xd7, 0x1a,
+	0x15, 0xe9, 0x42, 0x9d, 0xb3, 0x5e, 0x6d, 0x50, 0x3b, 0xea, 0x44, 0x75, 0xce, 0xc8, 0xe7, 0xd0,
+	0xa6, 0xd3, 0xa9, 0x2c, 0x84, 0xe9, 0xd5, 0x07, 0xb5, 0xa3, 0xe0, 0x34, 0x0c, 0x37, 0x55, 0x0f,
+	0x2d, 0x50, 0x38, 0xf6, 0x59, 0x51, 0x95, 0x4e, 0xce, 0xa1, 0x9d, 0x2b, 0x39, 0xe3, 0x19, 0xf6,
+	0x1a, 0x0e, 0xe9, 0xa3, 0xcd, 0x48, 0x57, 0x3e, 0x21, 0xaa, 0x32, 0xc9, 0x6b, 0xd8, 0xd7, 0x45,
+	0x12, 0x97, 0x47, 0xdd, 0x6b, 0x0e, 0x1a, 0x47, 0xc1, 0xe9, 0xf1, 0x66, 0xa4, 0x49, 0x91, 0x54,
+	0x60, 0x81, 0x5e, 0xfe, 0xd6, 0xe4, 0x25, 0xb4, 0xb8, 0x98, 0x49, 0xdd, 0x6b, 0xb9, 0x3b, 0x1d,
+	0x6f, 0xd9, 0xdd, 0x85, 0xcd, 0x89, 0x7c, 0x6a, 0xff, 0x39, 0xb4, 0xcb, 0x6e, 0xc9, 0x63, 0x68,
+	0xe1, 0x82, 0xf2, 0xac, 0x64, 0xd0, 0x1f, 0xfa, 0xbf, 0xd7, 0xa0, 0xe5, 0x32, 0xc8, 0x33, 0x80,
+	0xa9, 0x42, 0x6a, 0x90, 0xc5, 0xd4, 0xb8, 0xa0, 0x46, 0xd4, 0x29, 0x2d, 0x63, 0x63, 0xdd, 0x45,
+	0xce, 0x2a, 0x77, 0xdd, 0xbb, 0x4b, 0x8b, 0x77, 0x67, 0x54, 0x9b, 0x38, 0x93, 0x29, 0x17, 0x8e,
+	0xc5, 0x46, 0xd4, 0xb1, 0x96, 0x2f, 0xac, 0x81, 0x1c, 0x03, 0x71, 0x6e, 0x23, 0x7f, 0x42, 0x11,
+	0x2b, 0x9c, 0x29, 0xd4, 0xf3, 0x5e, 0xd3, 0x85, 0x3d, 0xb2, 0x9e, 0xaf, 0xac, 0x23, 0xf2, 0xf6,
+	0xe1, 0x35, 0x3c, 0xb4, 0xad, 0x44, 0x38, 0x43, 0x85, 0x62, 0x8a, 0xe4, 0x04, 0x9a, 0xb4, 0x30,
+	0x73, 0x77, 0xab, 0xe0, 0xf4, 0xe9, 0x3a, 0x13, 0x57, 0x54, 0x69, 0x64, 0x1e, 0xc0, 0x85, 0x91,
+	0xf7, 0xa1, 0xed, 0xe8, 0xe1, 0xcc, 0x5d, 0xb4, 0x13, 0xed, 0xd9, 0xe3, 0x05, 0x1b, 0x6a, 0x68,
+	0x97, 0xf4, 0x92, 0x27, 0xb0, 0x97, 0xa2, 0x60, 0xa8, 0x4a, 0x3e, 0xca, 0x93, 0xa5, 0xc9, 0x70,
+	0x93, 0x61, 0x99, 0xe9, 0x0f, 0xb6, 0xbd, 0x19, 0x57, 0xda, 0xc4, 0x82, 0x2e, 0xbc, 0x48, 0x3a,
+	0x51, 0xc7, 0x59, 0xbe, 0xa4, 0x0b, 0x24, 0x87, 0xe0, 0x7a, 0xf5, 0xde, 0xa6, 0xf3, 0x3e, 0xb0,
+	0x06, 0xeb, 0x1c, 0xbe, 0x06, 0xb8, 0x7b, 0xe2, 0x7f, 0xa8, 0x98, 0x40, 0xd3, 0x65, 0xf9, 0x72,
+	0xee, 0xb7, 0xad, 0x96, 0x70, 0x65, 0xe6, 0xf1, 0x2d, 0x52, 0xe5, 0xaa, 0xb5, 0xa2, 0x8e, 0xb3,
+	0x7c, 0x83, 0x54, 0x0d, 0xff, 0xa8, 0xc1, 0xc1, 0x8a, 0x68, 0xf0, 0xe7, 0x02, 0xb5, 0x21, 0x1f,
+	0xaf, 0x71, 0xf4, 0x6c, 0x9d, 0x23, 0x4b, 0xe7, 0xb9, 0x42, 0x86, 0xc2, 0x70, 0x9a, 0xe9, 0x92,
+	0xa7, 0x4b, 0x08, 0x56, 0x24, 0x5b, 0x4e, 0xd1, 0x6e, 0x8a, 0x85, 0x3b, 0xc5, 0x0e, 0x7f, 0xab,
+	0x41, 0xf7, 0xbf, 0x5f, 0x6a, 0x65, 0x18, 0xeb, 0xf7, 0x1d, 0xc6, 0xe1, 0x0f, 0xb0, 0x6f, 0xd1,
+	0xc7, 0x85, 0x99, 0x5b, 0x75, 0xaf, 0x2a, 0xa2, 0xb6, 0xaa, 0x08, 0xfb, 0xdc, 0x4a, 0xda, 0x71,
+	0xad, 0x0f, 0x1a, 0xf6, 0xb9, 0xdd, 0x81, 0x3c, 0x87, 0x80, 0x0b, 0x6d, 0xa8, 0x98, 0xa2, 0x4d,
+	0xf1, 0xef, 0x0d, 0x95, 0xe9, 0x82, 0xd9, 0x56, 0x0f, 0xae, 0xa8, 0xd6, 0x37, 0x52, 0xb1, 0xf3,
+	0x39, 0x15, 0x29, 0x5e, 0xea, 0x74, 0x57, 0x99, 0x7e, 0x00, 0xfb, 0x32, 0x63, 0x71, 0x5e, 0xe2,
+	0x94, 0x12, 0x08, 0x64, 0xc6, 0x2a, 0x68, 0x1b, 0x22, 0xf0, 0xe6, 0x2e, 0xc4, 0xdf, 0x24, 0x10,
+	0x78, 0x53, 0x85, 0x0c, 0xbf, 0x87, 0xee, 0x2b, 0x3b, 0xca, 0xf7, 0xbe, 0xc6, 0x21, 0x74, 0x6c,
+	0x0d, 0xbf, 0x1c, 0xfc, 0x1d, 0x1e, 0x08, 0xbc, 0x71, 0xa0, 0xa7, 0x7f, 0xb6, 0xe1, 0xc0, 0x32,
+	0x79, 0xb9, 0x24, 0x7c, 0x9c, 0x73, 0xf2, 0x29, 0xec, 0x4d, 0x0c, 0x35, 0x85, 0x26, 0x4f, 0x42,
+	0xbf, 0xbb, 0xc3, 0x6a, 0x77, 0x87, 0xaf, 0xec, 0xee, 0xee, 0x3f, 0x5e, 0xaf, 0x5a, 0x46, 0xc7,
+	0xd0, 0x75, 0xfb, 0xe0, 0x9a, 0x9b, 0xb9, 0xc3, 0x27, 0xff, 0x2e, 0x89, 0xfe, 0x96, 0x2b, 0x7d,
+	0xf9, 0xce, 0x3f, 0xc2, 0x7b, 0x13, 0x9e, 0x8a, 0x22, 0xff, 0xdf, 0x2a, 0x5c, 0x43, 0x77, 0x75,
+	0x57, 0x21, 0x23, 0xa3, 0xed, 0x10, 0x96, 0xdb, 0xec, 0x2d, 0xdc, 0x24, 0xd0, 0xfe, 0x0c, 0x8d,
+	0xfb, 0xd2, 0xed, 0x8c, 0xf8, 0xe1, 0x76, 0x09, 0xe4, 0x3b, 0xe8, 0x7a, 0x99, 0x2c, 0x05, 0x76,
+	0xb6, 0xc5, 0x70, 0xbd, 0xa9, 0xf3, 0xb7, 0x34, 0x90, 0x42, 0xe0, 0x43, 0x3c, 0xef, 0x2f, 0x36,
+	0x23, 0xaf, 0xeb, 0x76, 0xeb, 0x2e, 0x66, 0x00, 0x13, 0x34, 0xd5, 0x42, 0x7d, 0xb1, 0xfd, 0x7a,
+	0xf0, 0x4b, 0x69, 0xeb, 0x3a, 0x19, 0x3c, 0x1c, 0x33, 0x36, 0x29, 0x92, 0xea, 0x13, 0x7f, 0xb6,
+	0xd3, 0x6a, 0xdc, 0xb1, 0x9a, 0x84, 0x47, 0x11, 0x2e, 0xe4, 0x2f, 0xf8, 0x8e, 0x0a, 0xbe, 0xfc,
+	0xe4, 0xdb, 0xb3, 0x94, 0x9b, 0x79, 0x91, 0x84, 0x53, 0xb9, 0x18, 0xad, 0xe6, 0x8c, 0x68, 0xce,
+	0x47, 0x8c, 0x6b, 0x33, 0x4a, 0xe5, 0xe8, 0x8d, 0x3f, 0x7b, 0xc9, 0x9e, 0x9b, 0xf4, 0xb3, 0xbf,
+	0x03, 0x00, 0x00, 0xff, 0xff, 0x64, 0x59, 0xaa, 0x5e, 0x06, 0x0a, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -354,10 +702,16 @@ type UserManagementApiClient interface {
 	Status(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*_go.Status, error)
 	// Auth and Token handling:
 	LoginWithEmail(ctx context.Context, in *_go.UserCredentials, opts ...grpc.CallOption) (*UserAuthInfo, error)
-	SignupWithEmail(ctx context.Context, in *NewUser, opts ...grpc.CallOption) (*UserAuthInfo, error)
+	SignupWithEmail(ctx context.Context, in *_go.UserCredentials, opts ...grpc.CallOption) (*UserAuthInfo, error)
 	// Notify User management when token refreshed
 	TokenRefreshed(ctx context.Context, in *UserReference, opts ...grpc.CallOption) (*_go.Status, error)
+	// User properties:
+	GetUser(ctx context.Context, in *UserReference, opts ...grpc.CallOption) (*User, error)
 	ChangePassword(ctx context.Context, in *PasswordChangeMsg, opts ...grpc.CallOption) (*_go.Status, error)
+	ChangeEmail(ctx context.Context, in *EmailChangeMsg, opts ...grpc.CallOption) (*User, error)
+	SetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*User, error)
+	AddSubprofile(ctx context.Context, in *SubProfileRequest, opts ...grpc.CallOption) (*User, error)
+	RemoveSubprofile(ctx context.Context, in *SubProfileRequest, opts ...grpc.CallOption) (*User, error)
 }
 
 type userManagementApiClient struct {
@@ -386,7 +740,7 @@ func (c *userManagementApiClient) LoginWithEmail(ctx context.Context, in *_go.Us
 	return out, nil
 }
 
-func (c *userManagementApiClient) SignupWithEmail(ctx context.Context, in *NewUser, opts ...grpc.CallOption) (*UserAuthInfo, error) {
+func (c *userManagementApiClient) SignupWithEmail(ctx context.Context, in *_go.UserCredentials, opts ...grpc.CallOption) (*UserAuthInfo, error) {
 	out := new(UserAuthInfo)
 	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/SignupWithEmail", in, out, opts...)
 	if err != nil {
@@ -404,9 +758,54 @@ func (c *userManagementApiClient) TokenRefreshed(ctx context.Context, in *UserRe
 	return out, nil
 }
 
+func (c *userManagementApiClient) GetUser(ctx context.Context, in *UserReference, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/GetUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userManagementApiClient) ChangePassword(ctx context.Context, in *PasswordChangeMsg, opts ...grpc.CallOption) (*_go.Status, error) {
 	out := new(_go.Status)
 	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/ChangePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userManagementApiClient) ChangeEmail(ctx context.Context, in *EmailChangeMsg, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/ChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userManagementApiClient) SetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/SetProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userManagementApiClient) AddSubprofile(ctx context.Context, in *SubProfileRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/AddSubprofile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userManagementApiClient) RemoveSubprofile(ctx context.Context, in *SubProfileRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, "/influenzanet.user_management_api.UserManagementApi/RemoveSubprofile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -418,10 +817,16 @@ type UserManagementApiServer interface {
 	Status(context.Context, *empty.Empty) (*_go.Status, error)
 	// Auth and Token handling:
 	LoginWithEmail(context.Context, *_go.UserCredentials) (*UserAuthInfo, error)
-	SignupWithEmail(context.Context, *NewUser) (*UserAuthInfo, error)
+	SignupWithEmail(context.Context, *_go.UserCredentials) (*UserAuthInfo, error)
 	// Notify User management when token refreshed
 	TokenRefreshed(context.Context, *UserReference) (*_go.Status, error)
+	// User properties:
+	GetUser(context.Context, *UserReference) (*User, error)
 	ChangePassword(context.Context, *PasswordChangeMsg) (*_go.Status, error)
+	ChangeEmail(context.Context, *EmailChangeMsg) (*User, error)
+	SetProfile(context.Context, *ProfileRequest) (*User, error)
+	AddSubprofile(context.Context, *SubProfileRequest) (*User, error)
+	RemoveSubprofile(context.Context, *SubProfileRequest) (*User, error)
 }
 
 func RegisterUserManagementApiServer(s *grpc.Server, srv UserManagementApiServer) {
@@ -465,7 +870,7 @@ func _UserManagementApi_LoginWithEmail_Handler(srv interface{}, ctx context.Cont
 }
 
 func _UserManagementApi_SignupWithEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewUser)
+	in := new(_go.UserCredentials)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -477,7 +882,7 @@ func _UserManagementApi_SignupWithEmail_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/influenzanet.user_management_api.UserManagementApi/SignupWithEmail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserManagementApiServer).SignupWithEmail(ctx, req.(*NewUser))
+		return srv.(UserManagementApiServer).SignupWithEmail(ctx, req.(*_go.UserCredentials))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -500,6 +905,24 @@ func _UserManagementApi_TokenRefreshed_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserManagementApi_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserReference)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserManagementApiServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/influenzanet.user_management_api.UserManagementApi/GetUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserManagementApiServer).GetUser(ctx, req.(*UserReference))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserManagementApi_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PasswordChangeMsg)
 	if err := dec(in); err != nil {
@@ -514,6 +937,78 @@ func _UserManagementApi_ChangePassword_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserManagementApiServer).ChangePassword(ctx, req.(*PasswordChangeMsg))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserManagementApi_ChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmailChangeMsg)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserManagementApiServer).ChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/influenzanet.user_management_api.UserManagementApi/ChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserManagementApiServer).ChangeEmail(ctx, req.(*EmailChangeMsg))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserManagementApi_SetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserManagementApiServer).SetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/influenzanet.user_management_api.UserManagementApi/SetProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserManagementApiServer).SetProfile(ctx, req.(*ProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserManagementApi_AddSubprofile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserManagementApiServer).AddSubprofile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/influenzanet.user_management_api.UserManagementApi/AddSubprofile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserManagementApiServer).AddSubprofile(ctx, req.(*SubProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserManagementApi_RemoveSubprofile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserManagementApiServer).RemoveSubprofile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/influenzanet.user_management_api.UserManagementApi/RemoveSubprofile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserManagementApiServer).RemoveSubprofile(ctx, req.(*SubProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -539,8 +1034,28 @@ var _UserManagementApi_serviceDesc = grpc.ServiceDesc{
 			Handler:    _UserManagementApi_TokenRefreshed_Handler,
 		},
 		{
+			MethodName: "GetUser",
+			Handler:    _UserManagementApi_GetUser_Handler,
+		},
+		{
 			MethodName: "ChangePassword",
 			Handler:    _UserManagementApi_ChangePassword_Handler,
+		},
+		{
+			MethodName: "ChangeEmail",
+			Handler:    _UserManagementApi_ChangeEmail_Handler,
+		},
+		{
+			MethodName: "SetProfile",
+			Handler:    _UserManagementApi_SetProfile_Handler,
+		},
+		{
+			MethodName: "AddSubprofile",
+			Handler:    _UserManagementApi_AddSubprofile_Handler,
+		},
+		{
+			MethodName: "RemoveSubprofile",
+			Handler:    _UserManagementApi_RemoveSubprofile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -6,6 +6,29 @@ option go_package = "github.com/influenzanet/api/dist/go/user-management";
 import "global-types.proto";
 import "google/protobuf/empty.proto";
 
+message User {
+    message Account {
+        string email = 1;
+    }
+    message Infos {
+        int64 created_at = 1;
+        int64 updated_at = 2;
+        int64 last_login = 3;
+        int64 last_token_refresh = 4;
+    }
+
+    string id = 1;
+    Account account = 2;
+    Profile profile = 3;
+    repeated SubProfile sub_profiles = 4;
+    Infos infos = 5;
+}
+
+message UserReference {
+    influenzanet.ParsedToken auth = 1;
+    string user_id = 2;
+}
+
 message Profile {
     string gender = 1;
     string title = 2;
@@ -13,7 +36,19 @@ message Profile {
     string last_name = 4;
 }
 
-message NewUser {
+message SubProfile {
+    string id = 1;
+    string name = 2;
+    int32 birth_year = 3;
+    // TODO: define other properties of subprofiles (e.g. relation, occupation etc.)
+}
+
+message SubProfileRequest {
+    influenzanet.UserCredentials auth = 1;
+    SubProfile sub_profile = 2;
+}
+
+message ProfileRequest {
     influenzanet.UserCredentials auth = 1;
     Profile profile = 2;
 }
@@ -24,15 +59,15 @@ message UserAuthInfo {
     string instance_id = 3;
 }
 
-message UserReference {
-    influenzanet.ParsedToken auth = 1;
-    string user_id = 2;
-}
-
 message PasswordChangeMsg {
     influenzanet.ParsedToken auth = 1;
     string old_password = 2;
     string new_password = 3;
+}
+
+message EmailChangeMsg {
+    influenzanet.ParsedToken auth = 1;
+    string new_email = 2;
 }
 
 service UserManagementApi {
@@ -40,10 +75,16 @@ service UserManagementApi {
 
     // Auth and Token handling:
     rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc SignupWithEmail(NewUser) returns (UserAuthInfo);
+    rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
 
     // Notify User management when token refreshed
     rpc TokenRefreshed(UserReference) returns (influenzanet.Status);
 
+    // User properties:
+    rpc GetUser(UserReference) returns (User);
     rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
+    rpc ChangeEmail(EmailChangeMsg) returns (User);
+    rpc SetProfile(ProfileRequest) returns (User);
+    rpc AddSubprofile(SubProfileRequest) returns (User);
+    rpc RemoveSubprofile(SubProfileRequest) returns (User);
 }
