@@ -22,9 +22,10 @@ message User {
 
     string id = 1;
     Account account = 2;
-    Profile profile = 3;
-    repeated SubProfile sub_profiles = 4;
-    Infos infos = 5;
+    repeated string roles = 3;
+    Profile profile = 4;
+    repeated SubProfile sub_profiles = 5;
+    Infos infos = 6;
 }
 
 message UserReference {
