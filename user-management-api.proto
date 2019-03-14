@@ -48,12 +48,12 @@ message SubProfile {
 }
 
 message SubProfileRequest {
-    influenzanet.UserCredentials auth = 1;
+    influenzanet.ParsedToken auth = 1;
     SubProfile sub_profile = 2;
 }
 
 message ProfileRequest {
-    influenzanet.UserCredentials auth = 1;
+    influenzanet.ParsedToken auth = 1;
     Profile profile = 2;
 }
 
