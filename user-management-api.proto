@@ -86,7 +86,7 @@ service UserManagementApi {
     rpc GetUser(UserReference) returns (User);
     rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
     rpc ChangeEmail(EmailChangeMsg) returns (User);
-    rpc SetProfile(ProfileRequest) returns (User);
+    rpc UpdateProfile(ProfileRequest) returns (User);
     rpc AddSubprofile(SubProfileRequest) returns (User);
     rpc EditSubprofile(SubProfileRequest) returns (User);
     rpc RemoveSubprofile(SubProfileRequest) returns (User);
