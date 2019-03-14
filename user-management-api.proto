@@ -8,7 +8,10 @@ import "google/protobuf/empty.proto";
 
 message User {
     message Account {
-        string email = 1;
+        string type = 1; // email-pw, or other
+        string email = 2;
+        bool email_confirmed = 3;
+
     }
     message Infos {
         int64 created_at = 1;
@@ -76,9 +79,7 @@ service UserManagementApi {
     // Auth and Token handling:
     rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
     rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-
-    // Notify User management when token refreshed
-    rpc TokenRefreshed(UserReference) returns (influenzanet.Status);
+    rpc TokenRefreshed(UserReference) returns (influenzanet.Status); // Notify User management when token refreshed
 
     // User properties:
     rpc GetUser(UserReference) returns (User);
