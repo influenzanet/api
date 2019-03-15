@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package influenzanet.messaging_service_api;
+option go_package = "github.com/influenzanet/api/dist/go/messaging-service";
+
+import "global-types.proto";
+import "google/protobuf/empty.proto";
+
+message MessagingRequest { // basic first version - needs iteration
+  message Override {
+    bool override_pref = 1;
+    string method = 2;
+  }
+  
+  repeated string user_id = 1;
+  string template = 2;
+  string data = 3;
+  Override override = 4;
+}
+
+service MessagingServiceApi {
+    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+
+    rpc InitiateMessage(MessagingRequest) returns (influenzanet.Status);
+}
