@@ -110,6 +110,7 @@ service UserManagementApi {
     rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
     rpc ChangeEmail(EmailChangeMsg) returns (User);
     rpc UpdateName(NameUpdateRequest) returns (User);
+    rpc DeleteAccount(UserReference) returns (influenzanet.Status);
 
     // Profile methods:
     rpc UpdateBirthDate(ProfileRequest) returns (User);
