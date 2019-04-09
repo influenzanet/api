@@ -19,23 +19,12 @@ message TempTokenInfo {
   string instance_id = 6;
 }
 
-message TempTokenInfoResponse {
-  TempTokenInfo temp_token = 1;
-  influenzanet.Status status = 2;
-}
-
 message TempTokenInfos {
   repeated TempTokenInfo temp_tokens = 1;
-  influenzanet.Status status = 2;
 }
 
 message TempToken {
   string token = 1;
-}
-
-message TempTokenResponse {
-  TempToken temp_token = 1;
-  influenzanet.Status status = 2;
 }
 
 service AuthServiceApi {
@@ -50,8 +39,9 @@ service AuthServiceApi {
     rpc RenewJWT(EncodedToken) returns (EncodedToken);
 
     // Temporary Tokens handling:
-    rpc GenerateToken(TempTokenInfo) returns (TempTokenResponse);
-    rpc ValdateToken(TempToken) returns (TempTokenInfoResponse);
+    rpc GenerateToken(TempTokenInfo) returns (TempToken);
+    rpc ValdateToken(TempToken) returns (TempTokenInfo);
     rpc GetTokensByUser(TempTokenInfo) returns (TempTokenInfos);
     rpc DeleteToken(TempToken) returns (influenzanet.Status);
+    rpc PurgeUserTokens(TempTokenInfo) returns (influenzanet.Status);
 }
