@@ -39,9 +39,9 @@ service AuthServiceApi {
     rpc RenewJWT(EncodedToken) returns (EncodedToken);
 
     // Temporary Tokens handling:
-    rpc GenerateToken(TempTokenInfo) returns (TempToken);
-    rpc ValdateToken(TempToken) returns (TempTokenInfo);
-    rpc GetTokensByUser(TempTokenInfo) returns (TempTokenInfos);
-    rpc DeleteToken(TempToken) returns (influenzanet.Status);
-    rpc PurgeUserTokens(TempTokenInfo) returns (influenzanet.Status);
+    rpc GenerateTempToken(TempTokenInfo) returns (TempToken);
+    rpc ValidateTempToken(TempToken) returns (TempTokenInfo);
+    rpc GetTempTokens(TempTokenInfo) returns (TempTokenInfos); // by user_id, instance_id and/or type
+    rpc DeleteTempToken(TempToken) returns (influenzanet.Status);
+    rpc PurgeUserTempTokens(TempTokenInfo) returns (influenzanet.Status);
 }
