@@ -47,19 +47,19 @@ deploy-auth: DEPLOY_DIR = $(AUTH_SERVICE_DIR)
 deploy-auth:
 	mkdir -p $(DEPLOY_DIR)
 	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)
-	cp -Rf $(PROTO_BUILD_DIR)/auth-service/ $(DEPLOY_DIR)
+	cp -Rf $(PROTO_BUILD_DIR)/auth-service $(DEPLOY_DIR)
 
 deploy-user: DEPLOY_DIR = $(USER_SERVICE_DIR)
 deploy-user:
 	mkdir -p $(DEPLOY_DIR)
 	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)
-	cp -Rf $(PROTO_BUILD_DIR)/user-management/ $(DEPLOY_DIR)
+	cp -Rf $(PROTO_BUILD_DIR)/user-management $(DEPLOY_DIR)
 
 deploy-messaging: DEPLOY_DIR = $(MESSAGING_SERVICE_DIR)
 deploy-messaging:
 	mkdir -p $(DEPLOY_DIR)
 	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)/
-	cp -Rf $(PROTO_BUILD_DIR)/messaging-service/ $(DEPLOY_DIR)
+	cp -Rf $(PROTO_BUILD_DIR)/messaging-service $(DEPLOY_DIR)
 
 deploy-api: DEPLOY_DIR=$(API_SERVICE_DIR)
 deploy-api: 
