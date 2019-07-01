@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package influenzanet;
-option go_package = "github.com/influenzanet/api/dist/go";
+option go_package = "api";
 
 
 /*
@@ -13,11 +13,11 @@ message UserCredentials {
     string instance_id = 3;
 }
 
-message ParsedToken {
-    string user_id = 1;
-    repeated string roles = 2;
-    string instance_id = 3;
-    int64 issued_at = 4;
+message TokenInfos {
+    string id = 1; // User id
+    string instance_id = 2; // To which instance/country/high level group/ does the user belongs to
+    int64 issued_at = 3; // time of token generation in posix time
+    map<string, string> payload = 4; // optional infos, e.g., role(s)
 }
 
 /*

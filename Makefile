@@ -3,11 +3,10 @@ DEPLOY_TARGETS := deploy-auth deploy-user deploy-messaging deploy-api
 
 .PHONY: deploy install-go build $(DEPLOY_TARGETS)
 
-BUILD_DIR = ./temp
-DIST_DIR = ./dist
+BUILD_DIR = ./build
 
 # Path to go files once generated. Should point directly to the level of global-types.pb.go
-PROTO_BUILD_DIR=$(DIST_DIR)/go
+PROTO_BUILD_DIR=$(BUILD_DIR)
 
 # By default Make the assumption all services dirs are in upper level of the current dir by default
 # Directory names of the services are the same as the repo
@@ -34,9 +33,6 @@ endif
 build:
 	if [ ! -d "$(BUILD_DIR)" ]; then mkdir "$(BUILD_DIR)"; else rm -rf "$(BUILD_DIR)" &&  mkdir "$(BUILD_DIR)"; fi
 	find *.proto -maxdepth 1 -type f -exec protoc {} --go_out=plugins=grpc:$(BUILD_DIR) \;
-	if [ ! -d "$(DIST_DIR)" ]; then mkdir "$(DIST_DIR)"; else rm -rf "$(DIST_DIR)" &&  mkdir "$(DIST_DIR)"; fi
-	cp -R $(BUILD_DIR)/github.com/influenzanet/api/dist/* $(DIST_DIR)
-	rm -rf $(BUILD_DIR)
 
 install-go:
 	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
@@ -46,8 +42,7 @@ install-go:
 deploy-auth: DEPLOY_DIR = $(AUTH_SERVICE_DIR)
 deploy-auth:
 	mkdir -p $(DEPLOY_DIR)
-	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)
-	cp -Rf $(PROTO_BUILD_DIR)/auth-service $(DEPLOY_DIR)
+	find $(PROTO_BUILD_DIR)/*.pb.go -maxdepth 1 -type f -exec cp -f {} $(DEPLOY_DIR) \;
 
 deploy-user: DEPLOY_DIR = $(USER_SERVICE_DIR)
 deploy-user:
@@ -62,7 +57,7 @@ deploy-messaging:
 	cp -Rf $(PROTO_BUILD_DIR)/messaging-service $(DEPLOY_DIR)
 
 deploy-api: DEPLOY_DIR=$(API_SERVICE_DIR)
-deploy-api: 
+deploy-api:
 	mkdir -p $(DEPLOY_DIR)
 	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
 

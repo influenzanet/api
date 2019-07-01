@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package influenzanet.messaging_service_api;
-option go_package = "github.com/influenzanet/api/dist/go/messaging-service";
+option go_package = "api";
 
 import "global-types.proto";
 import "google/protobuf/empty.proto";
@@ -11,7 +11,7 @@ message MessagingRequest { // basic first version - needs iteration
     bool override_pref = 1;
     string method = 2;
   }
-  
+
   repeated string user_id = 1;
   string template = 2;
   string data = 3;

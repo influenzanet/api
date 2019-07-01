@@ -1,10 +1,37 @@
 syntax = "proto3";
 
 package influenzanet.user_management_api;
-option go_package = "github.com/influenzanet/api/dist/go/user-management";
+option go_package = "api";
 
 import "global-types.proto";
 import "google/protobuf/empty.proto";
+
+
+service UserManagementApi {
+    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+
+    // Auth and Token handling:
+    rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
+    rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
+    rpc TokenRefreshed(UserReference) returns (influenzanet.Status); // Notify User management when token refreshed
+
+    // User properties:
+    rpc GetUser(UserReference) returns (User);
+
+    // Account methods:
+    rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
+    rpc ChangeEmail(EmailChangeMsg) returns (User);
+    rpc UpdateName(NameUpdateRequest) returns (User);
+    rpc DeleteAccount(UserReference) returns (influenzanet.Status);
+
+    // Profile methods:
+    rpc UpdateBirthDate(ProfileRequest) returns (User);
+    rpc UpdateChildren(ProfileRequest) returns (User);
+    rpc AddSubprofile(SubProfileRequest) returns (User);
+    rpc EditSubprofile(SubProfileRequest) returns (User);
+    rpc RemoveSubprofile(SubProfileRequest) returns (User);
+}
+
 
 message User {
     message Account {
@@ -30,7 +57,7 @@ message User {
 }
 
 message UserReference {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     string user_id = 2;
 }
 
@@ -42,7 +69,7 @@ message Name {
 }
 
 message NameUpdateRequest {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     Name name = 2;
 }
 
@@ -69,12 +96,12 @@ message SubProfile {
 }
 
 message SubProfileRequest {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     SubProfile sub_profile = 2;
 }
 
 message ProfileRequest {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     Profile profile = 2;
 }
 
@@ -85,37 +112,12 @@ message UserAuthInfo {
 }
 
 message PasswordChangeMsg {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     string old_password = 2;
     string new_password = 3;
 }
 
 message EmailChangeMsg {
-    influenzanet.ParsedToken auth = 1;
+    string token = 1;
     string new_email = 2;
-}
-
-service UserManagementApi {
-    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
-
-    // Auth and Token handling:
-    rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc TokenRefreshed(UserReference) returns (influenzanet.Status); // Notify User management when token refreshed
-
-    // User properties:
-    rpc GetUser(UserReference) returns (User);
-
-    // Account methods:
-    rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
-    rpc ChangeEmail(EmailChangeMsg) returns (User);
-    rpc UpdateName(NameUpdateRequest) returns (User);
-    rpc DeleteAccount(UserReference) returns (influenzanet.Status);
-
-    // Profile methods:
-    rpc UpdateBirthDate(ProfileRequest) returns (User);
-    rpc UpdateChildren(ProfileRequest) returns (User);
-    rpc AddSubprofile(SubProfileRequest) returns (User);
-    rpc EditSubprofile(SubProfileRequest) returns (User);
-    rpc RemoveSubprofile(SubProfileRequest) returns (User);
 }
