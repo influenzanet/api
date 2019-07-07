@@ -42,18 +42,17 @@ install-go:
 deploy-auth: DEPLOY_DIR = $(AUTH_SERVICE_DIR)
 deploy-auth:
 	mkdir -p $(DEPLOY_DIR)
-	find $(PROTO_BUILD_DIR)/*.pb.go -maxdepth 1 -type f -exec cp -f {} $(DEPLOY_DIR) \;
+	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
 
 deploy-user: DEPLOY_DIR = $(USER_SERVICE_DIR)
 deploy-user:
 	mkdir -p $(DEPLOY_DIR)
-	find $(PROTO_BUILD_DIR)/*.pb.go -maxdepth 1 -type f -exec cp -f {} $(DEPLOY_DIR) \;
+	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
 
 deploy-messaging: DEPLOY_DIR = $(MESSAGING_SERVICE_DIR)
 deploy-messaging:
 	mkdir -p $(DEPLOY_DIR)
-	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)/
-	cp -Rf $(PROTO_BUILD_DIR)/messaging-service $(DEPLOY_DIR)
+	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
 
 deploy-api: DEPLOY_DIR=$(API_SERVICE_DIR)
 deploy-api:
