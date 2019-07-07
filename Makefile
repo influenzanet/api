@@ -47,8 +47,7 @@ deploy-auth:
 deploy-user: DEPLOY_DIR = $(USER_SERVICE_DIR)
 deploy-user:
 	mkdir -p $(DEPLOY_DIR)
-	cp -f $(PROTO_BUILD_DIR)/global-types.pb.go $(DEPLOY_DIR)
-	cp -Rf $(PROTO_BUILD_DIR)/user-management $(DEPLOY_DIR)
+	find $(PROTO_BUILD_DIR)/*.pb.go -maxdepth 1 -type f -exec cp -f {} $(DEPLOY_DIR) \;
 
 deploy-messaging: DEPLOY_DIR = $(MESSAGING_SERVICE_DIR)
 deploy-messaging:
