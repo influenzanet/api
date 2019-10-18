@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package influenzanet.study_service_api;
+option go_package = "api";
+
+import "global-types.proto";
+import "google/protobuf/empty.proto";
+
+
+service StudyServiceApi {
+    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+}
+
+message Study {
+
+}

@@ -1,5 +1,5 @@
 
-DEPLOY_TARGETS := deploy-auth deploy-user deploy-messaging deploy-api
+DEPLOY_TARGETS := deploy-auth deploy-user deploy-study deploy-messaging deploy-api
 
 .PHONY: deploy install-go build $(DEPLOY_TARGETS)
 
@@ -30,6 +30,10 @@ ifndef MESSAGING_SERVICE_DIR
 	MESSAGING_SERVICE_DIR=$(SERVICE_DIR)/messaging-service/api
 endif
 
+ifndef STUDY_SERVICE_DIR
+	STUDY_SERVICE_DIR=$(SERVICE_DIR)/study-service/api
+endif
+
 build:
 	if [ ! -d "$(BUILD_DIR)" ]; then mkdir "$(BUILD_DIR)"; else rm -rf "$(BUILD_DIR)" &&  mkdir "$(BUILD_DIR)"; fi
 	find *.proto -maxdepth 1 -type f -exec protoc {} --go_out=plugins=grpc:$(BUILD_DIR) \;
@@ -56,6 +60,11 @@ deploy-messaging:
 
 deploy-api: DEPLOY_DIR=$(API_SERVICE_DIR)
 deploy-api:
+	mkdir -p $(DEPLOY_DIR)
+	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
+
+deploy-study: DEPLOY_DIR = $(STUDY_SERVICE_DIR)
+deploy-study:
 	mkdir -p $(DEPLOY_DIR)
 	cp -Rf $(PROTO_BUILD_DIR)/* $(DEPLOY_DIR)/
 
