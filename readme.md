@@ -9,7 +9,7 @@ Checkout repo ...
 Protobuffer tool 'protoc' has to be installed. On mac, one way is to use homebrew ('brew install protobuf')
 For other platforms visit : https://github.com/protocolbuffers/protobuf/releases/tag/v3.8.0
 
-And install go dependencies by running 
+And install go dependencies by running
 ```bash
 make install-go
 ```
@@ -30,6 +30,7 @@ make deploy-auth
 make deploy-messaging
 make deploy-api
 make deploy-user
+make deploy-study
 ```
 
 ## Services
