@@ -13,8 +13,8 @@ service UserManagementApi {
     // Auth and Token handling:
     rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
     rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc CheckRefreshToken(UserReference) returns (influenzanet.Status);
-    rpc TokenRefreshed(UserReference) returns (influenzanet.Status); // Notify User management when token refreshed and send newly generated refresh token
+    rpc CheckRefreshToken(RefreshTokenRequest) returns (influenzanet.Status);
+    rpc TokenRefreshed(RefreshTokenRequest) returns (influenzanet.Status); // Notify User management when token refreshed and send newly generated refresh token
 
     // User properties:
     rpc GetUser(UserReference) returns (User);
@@ -61,6 +61,12 @@ message UserReference {
     influenzanet.TokenInfos token = 1;
     string user_id = 2;
     string instance_id = 3;
+}
+
+message RefreshTokenRequest {
+    string user_id = 1;
+    string instance_id = 2;
+    string refresh_token = 3;
 }
 
 message Name {
