@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package influenzanet;
+package inf;
 option go_package = "api";
 
 

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package influenzanet.messaging_service_api;
+package inf.messaging_service_api;
 option go_package = "api";
 
 import "global-types.proto";
@@ -19,7 +19,7 @@ message MessagingRequest { // basic first version - needs iteration
 }
 
 service MessagingServiceApi {
-    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+    rpc Status(google.protobuf.Empty) returns (inf.Status);
 
-    rpc InitiateMessage(MessagingRequest) returns (influenzanet.Status);
+    rpc InitiateMessage(MessagingRequest) returns (inf.Status);
 }

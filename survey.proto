@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package inf.survey;
+option go_package = "api";
+
+message SurveyVersion {
+    int64 published = 1;
+    int64 unpublished = 2;
+    SurveyItem surveyDefinition = 3;
+}
+
+message SurveyItem {
+    string id = 1;
+    string key = 2;
+    repeated string follows = 3;
+    Expression condition = 4;
+    float priority = 5;
+    int32 version = 6;
+    repeated string versionTags = 7;
+    // Question group attributes ->
+    repeated SurveyItem items = 8;
+    Expression selectionMethod = 9;
+    // Question attributes ->
+    string type = 10; // item/question type
+    // repeated Component components = 11;
+    // repeated Validation validations = 12;
+}
+
+message Expression {
+    string name = 1;
+    string dtype = 2;
+    repeated ExpressionArg data = 3;
+}
+
+message ExpressionArg {
+    oneof data {
+        Expression exp = 1;
+        string str = 2;
+        double num = 3;
+    }
+}
+
+message ResponseItem {
+    string key = 1;
+    string value = 2;
+    repeated ResponseItem items = 3;
+    string dtype = 4;
+}

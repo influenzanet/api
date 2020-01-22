@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package influenzanet.user_management_api;
+package inf.user_management_api;
 option go_package = "api";
 
 import "global-types.proto";
@@ -8,22 +8,22 @@ import "google/protobuf/empty.proto";
 
 
 service UserManagementApi {
-    rpc Status(google.protobuf.Empty) returns (influenzanet.Status);
+    rpc Status(google.protobuf.Empty) returns (inf.Status);
 
     // Auth and Token handling:
-    rpc LoginWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc SignupWithEmail(influenzanet.UserCredentials) returns (UserAuthInfo);
-    rpc CheckRefreshToken(RefreshTokenRequest) returns (influenzanet.Status);
-    rpc TokenRefreshed(RefreshTokenRequest) returns (influenzanet.Status); // Notify User management when token refreshed and send newly generated refresh token
+    rpc LoginWithEmail(inf.UserCredentials) returns (UserAuthInfo);
+    rpc SignupWithEmail(inf.UserCredentials) returns (UserAuthInfo);
+    rpc CheckRefreshToken(RefreshTokenRequest) returns (inf.Status);
+    rpc TokenRefreshed(RefreshTokenRequest) returns (inf.Status); // Notify User management when token refreshed and send newly generated refresh token
 
     // User properties:
     rpc GetUser(UserReference) returns (User);
 
     // Account methods:
-    rpc ChangePassword(PasswordChangeMsg) returns (influenzanet.Status);
+    rpc ChangePassword(PasswordChangeMsg) returns (inf.Status);
     rpc ChangeEmail(EmailChangeMsg) returns (User);
     rpc UpdateName(NameUpdateRequest) returns (User);
-    rpc DeleteAccount(UserReference) returns (influenzanet.Status);
+    rpc DeleteAccount(UserReference) returns (inf.Status);
 
     // Profile methods:
     rpc UpdateBirthDate(ProfileRequest) returns (User);
@@ -58,7 +58,7 @@ message User {
 }
 
 message UserReference {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     string user_id = 2;
     string instance_id = 3;
 }
@@ -77,7 +77,7 @@ message Name {
 }
 
 message NameUpdateRequest {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     Name name = 2;
 }
 
@@ -104,12 +104,12 @@ message SubProfile {
 }
 
 message SubProfileRequest {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     SubProfile sub_profile = 2;
 }
 
 message ProfileRequest {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     Profile profile = 2;
 }
 
@@ -120,12 +120,12 @@ message UserAuthInfo {
 }
 
 message PasswordChangeMsg {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     string old_password = 2;
     string new_password = 3;
 }
 
 message EmailChangeMsg {
-    influenzanet.TokenInfos token = 1;
+    inf.TokenInfos token = 1;
     string new_email = 2;
 }
