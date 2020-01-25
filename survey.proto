@@ -6,7 +6,7 @@ option go_package = "api";
 message SurveyVersion {
     int64 published = 1;
     int64 unpublished = 2;
-    SurveyItem surveyDefinition = 3;
+    SurveyItem survey_definition = 3;
 }
 
 message SurveyItem {
@@ -16,33 +16,55 @@ message SurveyItem {
     Expression condition = 4;
     float priority = 5;
     int32 version = 6;
-    repeated string versionTags = 7;
+    repeated string version_tags = 7;
     // Question group attributes ->
     repeated SurveyItem items = 8;
-    Expression selectionMethod = 9;
+    Expression selection_method = 9;
     // Question attributes ->
     string type = 10; // item/question type
-    // repeated Component components = 11;
-    // repeated Validation validations = 12;
+    repeated ItemComponent components = 11;
+    repeated Validation validations = 12;
 }
 
 message Expression {
     string name = 1;
-    string dtype = 2;
+    string returnType = 2;
     repeated ExpressionArg data = 3;
 }
 
 message ExpressionArg {
+    string dtype = 1;
     oneof data {
-        Expression exp = 1;
-        string str = 2;
-        double num = 3;
+        Expression exp = 2;
+        string str = 3;
+        double num = 4;
     }
 }
 
-message ResponseItem {
+message Validation {
     string key = 1;
-    string value = 2;
-    repeated ResponseItem items = 3;
-    string dtype = 4;
+    string type = 2; // hard or softvalidation
+    Expression rule = 3;
+}
+
+message ItemComponent {
+    string role = 1;
+    string key = 2;
+    repeated LocalisedObject content = 3;
+    Expression display_condition = 4;
+    Expression disabled = 5;
+
+    // group component
+    repeated ItemComponent items = 6;
+    Expression order = 7;
+
+    // response compontent
+    string dtype = 8;
+}
+
+message LocalisedObject {
+    string code = 1; // locale code
+
+    // for texts:
+    repeated ExpressionArg parts = 2;
 }
