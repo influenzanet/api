@@ -9,15 +9,15 @@ message SurveyItemResponse {
     // for item groups:
     repeated SurveyItemResponse items = 3;
     // for single items:
-    ResponseValue response = 4;
+    ResponseItem response = 4;
 }
 
-message ResponseValue {
+message ResponseItem {
     string key = 1;
     string value = 2;
     string dtype = 3;
     // For response option groups:
-    repeated ResponseValue items = 4;
+    repeated ResponseItem items = 4;
 }
 
 message ResponseMeta {
