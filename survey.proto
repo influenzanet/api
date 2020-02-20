@@ -3,6 +3,13 @@ syntax = "proto3";
 package inf.survey;
 option go_package = "api";
 
+message Survey {
+  string id = 1;
+  string name = 2;
+  SurveyVersion current = 3;
+  repeated SurveyVersion history = 4;
+}
+
 message SurveyVersion {
   int64 published = 1;
   int64 unpublished = 2;
@@ -66,6 +73,15 @@ message ItemComponent {
     string value = 2;
   }
   repeated Style style = 9;
+
+  repeated LocalisedObject description = 10;
+
+  message Properties {
+    ExpressionArg min = 1;
+    ExpressionArg max = 2;
+    ExpressionArg stepSize = 3;
+  }
+  Properties properties = 11;
 }
 
 message LocalisedObject {

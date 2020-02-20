@@ -7,33 +7,26 @@ import "global-types.proto";
 import "survey.proto";
 import "survey-response.proto";
 import "google/protobuf/empty.proto";
-import "google/protobuf/any.proto";
-
 
 service StudyServiceApi {
-    rpc Status(google.protobuf.Empty) returns (inf.Status);
+  rpc Status(google.protobuf.Empty) returns (inf.Status);
 
-    rpc CreateSurvey(CreateSurveyReq) returns (inf.survey.SurveyVersion);
+  rpc CreateSurvey(CreateSurveyReq) returns (inf.survey.SurveyVersion);
 
-    rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
+  rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
 }
 
-message Study {
-
-}
-
-message Question {
-    repeated google.protobuf.Any items = 2;
-}
+message Study {}
 
 message CreateSurveyReq {
-    inf.TokenInfos token = 1;
-    inf.survey.SurveyItem surveyDef = 2;
+  inf.TokenInfos token = 1;
+  inf.survey.SurveyItem surveyDef = 2;
 }
 
 message SubmitResponseReq {
-    inf.TokenInfos token = 1; // identifies the user who is submitting
-    string study_id = 2;
-    string profile_id = 3; // id of the profile / sub-profile the responses are submitted for
-    inf.survey_response.SurveyItemResponse responses = 4;
+  inf.TokenInfos token = 1; // identifies the user who is submitting
+  string study_id = 2;
+  string profile_id =
+      3; // id of the profile / sub-profile the responses are submitted for
+  inf.survey_response.SurveyItemResponse responses = 4;
 }
