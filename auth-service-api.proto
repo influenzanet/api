@@ -6,34 +6,37 @@ option go_package = "api";
 import "global-types.proto";
 import "google/protobuf/empty.proto";
 
-
 service AuthServiceApi {
-    rpc Status(google.protobuf.Empty) returns (inf.Status);
+  rpc Status(google.protobuf.Empty) returns (inf.Status);
 
-    // Auth:
-    rpc LoginWithEmail(inf.UserCredentials) returns (TokenResponse);
-    rpc SignupWithEmail(inf.UserCredentials) returns (TokenResponse);
+  // Auth:
+  rpc LoginWithEmail(inf.UserCredentials) returns (TokenResponse);
+  rpc SignupWithEmail(inf.UserCredentials) returns (TokenResponse);
 
-    // Token handling:
-    rpc ValidateJWT(JWTRequest) returns (inf.TokenInfos);
-    rpc RenewJWT(RefreshJWTRequest) returns (TokenResponse);
+  // Token handling:
+  rpc ValidateJWT(JWTRequest) returns (inf.TokenInfos);
+  rpc RenewJWT(RefreshJWTRequest) returns (TokenResponse);
 
-    // Temporary Tokens handling:
-    rpc GenerateTempToken(TempTokenInfo) returns (TempToken);
-    rpc ValidateTempToken(TempToken) returns (TempTokenInfo);
-    rpc GetTempTokens(TempTokenInfo) returns (TempTokenInfos); // by user_id, instance and/or type
-    rpc DeleteTempToken(TempToken) returns (inf.Status);
-    rpc PurgeUserTempTokens(TempTokenInfo) returns (inf.Status);
+  // App token handling:
+  rpc ValidateAppToken(AppTokenRequest) returns (AppTokenValidation);
+
+  // Temporary Tokens handling:
+  rpc GenerateTempToken(TempTokenInfo) returns (TempToken);
+  rpc ValidateTempToken(TempToken) returns (TempTokenInfo);
+  rpc GetTempTokens(TempTokenInfo)
+      returns (TempTokenInfos); // by user_id, instance and/or type
+  rpc DeleteTempToken(TempToken) returns (inf.Status);
+  rpc PurgeUserTempTokens(TempTokenInfo) returns (inf.Status);
 }
 
+message JWTRequest { string token = 1; }
 
-message JWTRequest {
-    string token = 1;
-}
+message AppTokenRequest { string token = 1; }
+message AppTokenValidation { repeated string instances = 1; }
 
 message RefreshJWTRequest {
-    string refresh_token = 1;
-    string access_token = 2;
+  string refresh_token = 1;
+  string access_token = 2;
 }
 
 message TempTokenInfo {
@@ -45,16 +48,12 @@ message TempTokenInfo {
   string instance_id = 6;
 }
 
-message TempTokenInfos {
-  repeated TempTokenInfo temp_tokens = 1;
-}
+message TempTokenInfos { repeated TempTokenInfo temp_tokens = 1; }
 
-message TempToken {
-  string token = 1;
-}
+message TempToken { string token = 1; }
 
 message TokenResponse {
-    string access_token = 1;
-    string refresh_token = 2;
-    int32 expires_in = 3;
+  string access_token = 1;
+  string refresh_token = 2;
+  int32 expires_in = 3;
 }
