@@ -3,11 +3,19 @@ syntax = "proto3";
 package inf.survey;
 option go_package = "api";
 
+import "survey-response.proto";
+
+message SurveyContext {
+  string mode = 1;
+  repeated inf.survey_response.SurveyResponse previousResponses = 2;
+}
+
 message Survey {
   string id = 1;
   string name = 2;
   SurveyVersion current = 3;
   repeated SurveyVersion history = 4;
+  string description = 5;
 }
 
 message SurveyVersion {
@@ -80,6 +88,7 @@ message ItemComponent {
     ExpressionArg min = 1;
     ExpressionArg max = 2;
     ExpressionArg stepSize = 3;
+    ExpressionArg dateInputMode = 4;
   }
   Properties properties = 11;
 }

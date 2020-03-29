@@ -13,8 +13,27 @@ service StudyServiceApi {
 
   rpc CreateSurvey(CreateSurveyReq) returns (inf.survey.SurveyVersion);
 
+  rpc EnterStudy(EnterStudyRequest) returns (AssignedSurveys);
+  rpc GetAssignedSurveys(inf.TokenInfos) returns (AssignedSurveys);
+  rpc GetSurvey(GetSurveyRequest) returns (SurveyAndContext);
+  rpc SubmitStatusReport(StatusReportRequest) returns (AssignedSurveys);
   rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
 }
+
+message SurveyAndContext {
+  inf.survey.Survey survey = 1;
+  inf.survey.SurveyContext context = 2;
+}
+
+message AssignedSurvey {
+  string study_key = 1;
+  string survey_key = 2;
+  string survey_name = 3;
+  string description = 4;
+  int64 valid_until = 5;
+}
+
+message AssignedSurveys { repeated AssignedSurvey surveys = 1; }
 
 message Study {}
 
@@ -29,4 +48,21 @@ message SubmitResponseReq {
   string profile_id =
       3; // id of the profile / sub-profile the responses are submitted for
   inf.survey_response.SurveyItemResponse responses = 4;
+}
+
+message EnterStudyRequest {
+  inf.TokenInfos token = 1;
+  string study_key = 2;
+}
+
+message GetSurveyRequest {
+  inf.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+}
+
+message StatusReportRequest {
+  inf.TokenInfos token = 1;
+  repeated string study_keys = 2;
+  inf.survey_response.SurveyResponse status_survey = 3;
 }
