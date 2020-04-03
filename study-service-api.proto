@@ -4,6 +4,7 @@ package inf.study_service_api;
 option go_package = "api";
 
 import "global-types.proto";
+import "study.proto";
 import "survey.proto";
 import "survey-response.proto";
 import "google/protobuf/empty.proto";
@@ -11,31 +12,23 @@ import "google/protobuf/empty.proto";
 service StudyServiceApi {
   rpc Status(google.protobuf.Empty) returns (inf.Status);
 
+  // Study flow
+  rpc EnterStudy(EnterStudyRequest) returns (inf.study.AssignedSurveys);
+  rpc GetAssignedSurveys(inf.TokenInfos) returns (inf.study.AssignedSurveys);
+  rpc GetAssignedSurvey(GetSurveyRequest) returns (SurveyAndContext);
+  rpc SubmitStatusReport(StatusReportRequest)
+      returns (inf.study.AssignedSurveys);
+  rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
+
   rpc CreateSurvey(CreateSurveyReq) returns (inf.survey.SurveyVersion);
 
-  rpc EnterStudy(EnterStudyRequest) returns (AssignedSurveys);
-  rpc GetAssignedSurveys(inf.TokenInfos) returns (AssignedSurveys);
-  rpc GetSurvey(GetSurveyRequest) returns (SurveyAndContext);
-  rpc SubmitStatusReport(StatusReportRequest) returns (AssignedSurveys);
-  rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
+  // TODO: Create study - update - rules
 }
 
 message SurveyAndContext {
   inf.survey.Survey survey = 1;
   inf.survey.SurveyContext context = 2;
 }
-
-message AssignedSurvey {
-  string study_key = 1;
-  string survey_key = 2;
-  string survey_name = 3;
-  string description = 4;
-  int64 valid_until = 5;
-}
-
-message AssignedSurveys { repeated AssignedSurvey surveys = 1; }
-
-message Study {}
 
 message CreateSurveyReq {
   inf.TokenInfos token = 1;
@@ -44,10 +37,8 @@ message CreateSurveyReq {
 
 message SubmitResponseReq {
   inf.TokenInfos token = 1; // identifies the user who is submitting
-  string study_id = 2;
-  string profile_id =
-      3; // id of the profile / sub-profile the responses are submitted for
-  inf.survey_response.SurveyItemResponse responses = 4;
+  string study_key = 2;
+  inf.survey_response.SurveyResponse response = 3;
 }
 
 message EnterStudyRequest {
