@@ -20,7 +20,7 @@ service StudyServiceApi {
       returns (inf.study.AssignedSurveys);
   rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
 
-  rpc CreateSurvey(CreateSurveyReq) returns (inf.survey.SurveyVersion);
+  rpc AddSurveyToStudy(AddSurveyReq) returns (inf.survey.SurveyVersion);
 
   // TODO: Create study - update - rules
 }
@@ -30,9 +30,10 @@ message SurveyAndContext {
   inf.survey.SurveyContext context = 2;
 }
 
-message CreateSurveyReq {
+message AddSurveyReq {
   inf.TokenInfos token = 1;
-  inf.survey.SurveyItem surveyDef = 2;
+  string study_key = 2;
+  inf.survey.Survey survey = 3;
 }
 
 message SubmitResponseReq {
