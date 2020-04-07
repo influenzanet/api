@@ -9,6 +9,8 @@ message SurveyResponse {
   string submitted_for = 3;
   int64 submitted_at = 4;
   repeated SurveyItemResponse responses = 5;
+  map<string, string> context =
+      6; // e.g. to store location and other context data
 }
 
 message SurveyItemResponse {

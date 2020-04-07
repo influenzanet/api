@@ -18,16 +18,35 @@ service StudyServiceApi {
   rpc GetAssignedSurvey(GetSurveyRequest) returns (SurveyAndContext);
   rpc SubmitStatusReport(StatusReportRequest)
       returns (inf.study.AssignedSurveys);
-  rpc SubmitResponse(SubmitResponseReq) returns (inf.Status);
+  rpc SubmitResponse(SubmitResponseReq) returns (inf.study.AssignedSurveys);
 
+  // Study management
   rpc AddSurveyToStudy(AddSurveyReq) returns (inf.survey.SurveyVersion);
+  rpc GetStudySurveyInfos(StudyReferenceReq) returns (SurveyInfoResp);
 
-  // TODO: Create study - update - rules
+  // TODO: Create study
+  // TODO: Update study // manage roles
+  // TODO: Archive study
 }
 
 message SurveyAndContext {
   inf.survey.Survey survey = 1;
   inf.survey.SurveyContext context = 2;
+  inf.survey_response.SurveyResponse prefill = 3;
+}
+
+message StudyReferenceReq {
+  inf.TokenInfos token = 1;
+  string study_key = 2;
+}
+
+message SurveyInfoResp {
+  message SurveyInfo {
+    string key = 1;
+    repeated inf.survey.LocalisedObject name = 2;
+    repeated inf.survey.LocalisedObject description = 3;
+  }
+  repeated SurveyInfo infos = 1;
 }
 
 message AddSurveyReq {
@@ -55,6 +74,5 @@ message GetSurveyRequest {
 
 message StatusReportRequest {
   inf.TokenInfos token = 1;
-  repeated string study_keys = 2;
-  inf.survey_response.SurveyResponse status_survey = 3;
+  inf.survey_response.SurveyResponse status_survey = 2;
 }
