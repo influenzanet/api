@@ -21,12 +21,17 @@ service StudyServiceApi {
   rpc SubmitResponse(SubmitResponseReq) returns (inf.study.AssignedSurveys);
 
   // Study management
+  rpc CreateNewStudy(NewStudyRequest) returns (inf.study.Study);
   rpc AddSurveyToStudy(AddSurveyReq) returns (inf.survey.SurveyVersion);
   rpc GetStudySurveyInfos(StudyReferenceReq) returns (SurveyInfoResp);
 
-  // TODO: Create study
   // TODO: Update study // manage roles
   // TODO: Archive study
+}
+
+message NewStudyRequest {
+  inf.TokenInfos token = 1;
+  inf.study.Study study = 2;
 }
 
 message SurveyAndContext {

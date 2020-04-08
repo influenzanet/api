@@ -6,126 +6,128 @@ option go_package = "api";
 import "global-types.proto";
 import "google/protobuf/empty.proto";
 
-
 service UserManagementApi {
-    rpc Status(google.protobuf.Empty) returns (inf.Status);
+  rpc Status(google.protobuf.Empty) returns (inf.Status);
 
-    // Auth and Token handling:
-    rpc LoginWithEmail(inf.UserCredentials) returns (UserAuthInfo);
-    rpc SignupWithEmail(inf.UserCredentials) returns (UserAuthInfo);
-    rpc CheckRefreshToken(RefreshTokenRequest) returns (inf.Status);
-    rpc TokenRefreshed(RefreshTokenRequest) returns (inf.Status); // Notify User management when token refreshed and send newly generated refresh token
+  // Auth and Token handling:
+  rpc LoginWithEmail(inf.UserCredentials) returns (UserAuthInfo);
+  rpc SignupWithEmail(inf.UserCredentials) returns (UserAuthInfo);
+  rpc CheckRefreshToken(RefreshTokenRequest) returns (inf.Status);
+  rpc TokenRefreshed(RefreshTokenRequest)
+      returns (inf.Status); // Notify User management when token refreshed and
+                            // send newly generated refresh token
 
-    // User properties:
-    rpc GetUser(UserReference) returns (User);
+  // User properties:
+  rpc GetUser(UserReference) returns (User);
 
-    // Account methods:
-    rpc ChangePassword(PasswordChangeMsg) returns (inf.Status);
-    rpc ChangeEmail(EmailChangeMsg) returns (User);
-    rpc UpdateName(NameUpdateRequest) returns (User);
-    rpc DeleteAccount(UserReference) returns (inf.Status);
+  // Account methods:
+  rpc ChangePassword(PasswordChangeMsg) returns (inf.Status);
+  rpc ChangeEmail(EmailChangeMsg) returns (User);
+  rpc UpdateName(NameUpdateRequest) returns (User);
+  rpc DeleteAccount(UserReference) returns (inf.Status);
 
-    // Profile methods:
-    rpc UpdateBirthDate(ProfileRequest) returns (User);
-    rpc UpdateChildren(ProfileRequest) returns (User);
-    rpc AddSubprofile(SubProfileRequest) returns (User);
-    rpc EditSubprofile(SubProfileRequest) returns (User);
-    rpc RemoveSubprofile(SubProfileRequest) returns (User);
+  // Profile methods:
+  rpc UpdateBirthDate(ProfileRequest) returns (User);
+  rpc UpdateChildren(ProfileRequest) returns (User);
+  rpc AddSubprofile(SubProfileRequest) returns (User);
+  rpc EditSubprofile(SubProfileRequest) returns (User);
+  rpc RemoveSubprofile(SubProfileRequest) returns (User);
 }
 
-
 message User {
-    message Account {
-        string type = 1; // email-pw, or other
-        string email = 2;
-        bool email_confirmed = 3;
-        Name name = 4;
+  message Account {
+    string type = 1; // email-pw, or other
+    string email = 2;
+    bool email_confirmed = 3;
+    Name name = 4;
+  }
+  message Infos {
+    int64 created_at = 1;
+    int64 updated_at = 2;
+    int64 last_login = 3;
+    int64 last_token_refresh = 4;
+  }
 
-    }
-    message Infos {
-        int64 created_at = 1;
-        int64 updated_at = 2;
-        int64 last_login = 3;
-        int64 last_token_refresh = 4;
-    }
-
-    string id = 1;
-    Account account = 2;
-    repeated string roles = 3;
-    Profile profile = 4;
-    repeated SubProfile sub_profiles = 5;
-    Infos infos = 6;
+  string id = 1;
+  Account account = 2;
+  repeated string roles = 3;
+  Profile profile = 4;
+  repeated SubProfile sub_profiles = 5;
+  Infos infos = 6;
 }
 
 message UserReference {
-    inf.TokenInfos token = 1;
-    string user_id = 2;
-    string instance_id = 3;
+  inf.TokenInfos token = 1;
+  string user_id = 2;
+  string instance_id = 3;
 }
 
 message RefreshTokenRequest {
-    string user_id = 1;
-    string instance_id = 2;
-    string refresh_token = 3;
+  string user_id = 1;
+  string instance_id = 2;
+  string refresh_token = 3;
 }
 
 message Name {
-    string gender = 1;
-    string title = 2;
-    string first_name = 3;
-    string last_name = 4;
+  string gender = 1;
+  string title = 2;
+  string first_name = 3;
+  string last_name = 4;
 }
 
 message NameUpdateRequest {
-    inf.TokenInfos token = 1;
-    Name name = 2;
+  inf.TokenInfos token = 1;
+  Name name = 2;
 }
 
 message Child {
-    int32 birth_year = 1;
-    string gender = 2;
+  int32 birth_year = 1;
+  string gender = 2;
 }
 
 message Profile {
-    int32 birth_year = 1;
-    int32 birth_month = 2; // optional
-    int32 birth_day = 3; // optional
-    int64 birth_date_updated_at = 4;
+  int32 birth_year = 1;
+  int32 birth_month = 2; // optional
+  int32 birth_day = 3;   // optional
+  int64 birth_date_updated_at = 4;
 
-    repeated Child children = 5;
-    int64 children_updated_at = 6;
+  repeated Child children = 5;
+  int64 children_updated_at = 6;
 }
 
 message SubProfile {
-    string id = 1;
-    string name = 2; // Nickname, for the user to identify subprofile
-    int32 birth_year = 3;
-    // TODO: define other properties of subprofiles (e.g. relation, occupation etc.)
+  string id = 1;
+  string name = 2; // Nickname, for the user to identify subprofile
+  int32 birth_year = 3;
+  // TODO: define other properties of subprofiles (e.g. relation, occupation
+  // etc.)
 }
 
 message SubProfileRequest {
-    inf.TokenInfos token = 1;
-    SubProfile sub_profile = 2;
+  inf.TokenInfos token = 1;
+  SubProfile sub_profile = 2;
 }
 
 message ProfileRequest {
-    inf.TokenInfos token = 1;
-    Profile profile = 2;
+  inf.TokenInfos token = 1;
+  Profile profile = 2;
 }
 
 message UserAuthInfo {
-    string user_id = 1;
-    repeated string roles = 2;
-    string instance_id = 3;
+  string user_id = 1;
+  repeated string roles = 2;
+  string instance_id = 3;
+  string username = 4;
+  string profile_id = 5;
 }
 
 message PasswordChangeMsg {
-    inf.TokenInfos token = 1;
-    string old_password = 2;
-    string new_password = 3;
+  inf.TokenInfos token = 1;
+  string old_password = 2;
+  string new_password = 3;
 }
 
 message EmailChangeMsg {
-    inf.TokenInfos token = 1;
-    string new_email = 2;
+  inf.TokenInfos token = 1;
+  string new_email = 2;
 }

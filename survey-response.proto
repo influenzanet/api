@@ -5,12 +5,11 @@ option go_package = "api";
 
 message SurveyResponse {
   string key = 1;
-  string submitted_by = 2;
-  string submitted_for = 3;
-  int64 submitted_at = 4;
-  repeated SurveyItemResponse responses = 5;
+  string participant_id = 2;
+  int64 submitted_at = 3;
+  repeated SurveyItemResponse responses = 4;
   map<string, string> context =
-      6; // e.g. to store location and other context data
+      5; // e.g. to store location and other context data
 }
 
 message SurveyItemResponse {
