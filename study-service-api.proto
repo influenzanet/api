@@ -22,7 +22,8 @@ service StudyServiceApi {
 
   // Study management
   rpc CreateNewStudy(NewStudyRequest) returns (inf.study.Study);
-  rpc AddSurveyToStudy(AddSurveyReq) returns (inf.survey.SurveyVersion);
+  rpc SaveSurveyToStudy(AddSurveyReq)
+      returns (inf.survey.SurveyVersion); // add or update
   rpc GetStudySurveyInfos(StudyReferenceReq) returns (SurveyInfoResp);
 
   // TODO: Update study // manage roles
