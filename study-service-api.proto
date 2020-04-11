@@ -15,7 +15,7 @@ service StudyServiceApi {
   // Study flow
   rpc EnterStudy(EnterStudyRequest) returns (inf.study.AssignedSurveys);
   rpc GetAssignedSurveys(inf.TokenInfos) returns (inf.study.AssignedSurveys);
-  rpc GetAssignedSurvey(GetSurveyRequest) returns (SurveyAndContext);
+  rpc GetAssignedSurvey(SurveyReferenceRequest) returns (SurveyAndContext);
   rpc SubmitStatusReport(StatusReportRequest)
       returns (inf.study.AssignedSurveys);
   rpc SubmitResponse(SubmitResponseReq) returns (inf.study.AssignedSurveys);
@@ -23,7 +23,8 @@ service StudyServiceApi {
   // Study management
   rpc CreateNewStudy(NewStudyRequest) returns (inf.study.Study);
   rpc SaveSurveyToStudy(AddSurveyReq)
-      returns (inf.survey.SurveyVersion); // add or update
+      returns (inf.survey.Survey); // add or update
+  rpc RemoveSurveyFromStudy(SurveyReferenceRequest) returns (inf.Status);
   rpc GetStudySurveyInfos(StudyReferenceReq) returns (SurveyInfoResp);
 
   // TODO: Update study // manage roles
@@ -72,7 +73,7 @@ message EnterStudyRequest {
   string study_key = 2;
 }
 
-message GetSurveyRequest {
+message SurveyReferenceRequest {
   inf.TokenInfos token = 1;
   string study_key = 2;
   string survey_key = 3;

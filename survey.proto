@@ -26,6 +26,12 @@ message Survey {
   repeated LocalisedObject description = 5;
   repeated inf.expressions.Expression prefill_rules = 6;
   SurveyContextDef context_rules = 7;
+  MaxItemsPerPage max_items_per_page = 8;
+}
+
+message MaxItemsPerPage {
+  int32 large = 1;
+  int32 small = 2;
 }
 
 message SurveyVersion {
