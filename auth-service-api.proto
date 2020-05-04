@@ -61,4 +61,5 @@ message TokenResponse {
   int32 expires_in = 3;
   repeated inf.user_management_api.Profile profiles = 4;
   string selected_profile_id = 5;
+  string preferred_language = 6;
 }

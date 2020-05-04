@@ -25,6 +25,7 @@ service UserManagementApi {
   rpc ChangePassword(PasswordChangeMsg) returns (inf.Status);
   rpc ChangeAccountIDEmail(EmailChangeMsg) returns (User);
   rpc DeleteAccount(UserReference) returns (inf.Status);
+  rpc ChangePreferredLanguage(LanguageChangeMsg) returns (User);
 
   // Profile methods:
   rpc SaveProfile(ProfileRequest) returns (User); // add or update a profle
@@ -41,6 +42,7 @@ message User {
     string type = 1; // email-pw, or other
     string account_id = 2;
     int64 account_confirmed_at = 3;
+    string preferred_language = 4;
   }
   message Timestamps {
     int64 created_at = 1;
@@ -108,6 +110,7 @@ message UserAuthInfo {
   repeated Profile profiles = 5;
   Profile selected_profile = 6;
   bool account_confirmed = 7;
+  string preferred_language = 8;
 }
 
 message PasswordChangeMsg {
@@ -119,6 +122,11 @@ message PasswordChangeMsg {
 message EmailChangeMsg {
   inf.TokenInfos token = 1;
   string new_email = 2;
+}
+
+message LanguageChangeMsg {
+  inf.TokenInfos token = 1;
+  string language_code = 2;
 }
 
 message ContactPreferencesMsg {
