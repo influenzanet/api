@@ -5,6 +5,7 @@ option go_package = "api";
 
 import "global-types.proto";
 import "google/protobuf/empty.proto";
+import "user-management-api.proto";
 
 service AuthServiceApi {
   rpc Status(google.protobuf.Empty) returns (inf.Status);
@@ -12,6 +13,8 @@ service AuthServiceApi {
   // Auth:
   rpc LoginWithEmail(inf.UserCredentials) returns (TokenResponse);
   rpc SignupWithEmail(inf.UserCredentials) returns (TokenResponse);
+  rpc SwitchProfile(inf.user_management_api.ProfileRequest)
+      returns (TokenResponse);
 
   // Token handling:
   rpc ValidateJWT(JWTRequest) returns (inf.TokenInfos);
@@ -56,4 +59,6 @@ message TokenResponse {
   string access_token = 1;
   string refresh_token = 2;
   int32 expires_in = 3;
+  repeated inf.user_management_api.Profile profiles = 4;
+  string selected_profile_id = 5;
 }
