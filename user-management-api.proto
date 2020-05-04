@@ -10,8 +10,8 @@ service UserManagementApi {
   rpc Status(google.protobuf.Empty) returns (inf.Status);
 
   // Auth and Token handling:
-  rpc LoginWithEmail(inf.UserCredentials) returns (UserAuthInfo);
-  rpc SignupWithEmail(inf.UserCredentials) returns (UserAuthInfo);
+  rpc LoginWithEmail(LoginWithEmailMsg) returns (UserAuthInfo);
+  rpc SignupWithEmail(SignupWithEmailMsg) returns (UserAuthInfo);
   rpc CheckRefreshToken(RefreshTokenRequest) returns (inf.Status);
   rpc TokenRefreshed(RefreshTokenRequest)
       returns (inf.Status); // Notify User management when token refreshed and
@@ -73,6 +73,20 @@ message ContactInfo {
 message ContactPreferences {
   bool subscribed_to_newletter = 1;
   repeated string send_newsletter_to = 2; // list of contact info ids
+}
+
+message SignupWithEmailMsg {
+  string email = 1;
+  string password = 2;
+  string instance_id = 3;
+  string preferred_language = 4;
+  bool wants_newsletter = 5;
+}
+
+message LoginWithEmailMsg {
+  string email = 1;
+  string password = 2;
+  string instance_id = 3;
 }
 
 message UserReference {

@@ -11,8 +11,10 @@ service AuthServiceApi {
   rpc Status(google.protobuf.Empty) returns (inf.Status);
 
   // Auth:
-  rpc LoginWithEmail(inf.UserCredentials) returns (TokenResponse);
-  rpc SignupWithEmail(inf.UserCredentials) returns (TokenResponse);
+  rpc LoginWithEmail(inf.user_management_api.LoginWithEmailMsg)
+      returns (TokenResponse);
+  rpc SignupWithEmail(inf.user_management_api.SignupWithEmailMsg)
+      returns (TokenResponse);
   rpc SwitchProfile(inf.user_management_api.ProfileRequest)
       returns (TokenResponse);
 
