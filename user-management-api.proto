@@ -23,12 +23,17 @@ service UserManagementApi {
 
   // Account methods:
   rpc ChangePassword(PasswordChangeMsg) returns (inf.Status);
-  rpc ChangeEmail(EmailChangeMsg) returns (User);
+  rpc ChangeAccountIDEmail(EmailChangeMsg) returns (User);
   rpc DeleteAccount(UserReference) returns (inf.Status);
 
   // Profile methods:
   rpc SaveProfile(ProfileRequest) returns (User); // add or update a profle
   rpc RemoveProfile(ProfileRequest) returns (User);
+
+  // Contacts:
+  rpc UpdateContactPreferences(ContactPreferencesMsg) returns (User);
+  rpc AddEmail(ContactInfoMsg) returns (User);
+  rpc RemoveEmail(ContactInfoMsg) returns (User);
 }
 
 message User {
@@ -48,7 +53,7 @@ message User {
   Account account = 2;
   repeated string roles = 3;
   Timestamps timestamps = 4;
-  Profile profile = 5;
+  repeated Profile profiles = 5;
   ContactPreferences contact_preferences = 6;
   repeated ContactInfo contact_infos = 7;
 }
@@ -114,4 +119,14 @@ message PasswordChangeMsg {
 message EmailChangeMsg {
   inf.TokenInfos token = 1;
   string new_email = 2;
+}
+
+message ContactPreferencesMsg {
+  inf.TokenInfos token = 1;
+  ContactPreferences contact_preferences = 2;
+}
+
+message ContactInfoMsg {
+  inf.TokenInfos token = 1;
+  ContactInfo contact_info = 2;
 }
