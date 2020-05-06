@@ -136,6 +136,7 @@ message PasswordChangeMsg {
 message EmailChangeMsg {
   inf.TokenInfos token = 1;
   string new_email = 2;
+  bool keep_old_email = 3;
 }
 
 message LanguageChangeMsg {
