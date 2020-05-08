@@ -71,7 +71,7 @@ message ContactInfo {
 }
 
 message ContactPreferences {
-  bool subscribed_to_newletter = 1;
+  bool subscribed_to_newsletter = 1;
   repeated string send_newsletter_to = 2; // list of contact info ids
 }
 
