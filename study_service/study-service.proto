@@ -1,0 +1,185 @@
+syntax = "proto3";
+
+package influenzanet.study_service;
+
+option go_package = "github.com/influenzanet/study-service/pkg/api";
+
+import "shared/auth_info.proto";
+import "study_service/study.proto";
+import "study_service/survey.proto";
+import "study_service/expression.proto";
+import "study_service/survey-response.proto";
+import "google/protobuf/empty.proto";
+
+service StudyServiceApi {
+  rpc Status(google.protobuf.Empty) returns (ServiceStatus);
+
+  // Study flow
+  rpc EnterStudy(EnterStudyRequest) returns (AssignedSurveys);
+  rpc GetAssignedSurveys(influenzanet.shared.TokenInfos)
+      returns (AssignedSurveys);
+  rpc GetAssignedSurvey(SurveyReferenceRequest) returns (SurveyAndContext);
+  rpc PostponeSurvey(PostponeSurveyRequest) returns (AssignedSurveys);
+  rpc SubmitStatusReport(StatusReportRequest) returns (AssignedSurveys);
+  rpc SubmitResponse(SubmitResponseReq) returns (AssignedSurveys);
+  rpc LeaveStudy(LeaveStudyMsg) returns (AssignedSurveys);
+  rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
+      returns (ServiceStatus);
+
+  // for all profiles (also not active studies):
+  rpc GetStudiesForUser(GetStudiesForUserReq) returns (Studies);
+  // all active studies even if user not in:
+  rpc GetActiveStudies(influenzanet.shared.TokenInfos) returns (Studies);
+  // get info about surveys in a study:
+  rpc GetStudySurveyInfos(StudyReferenceReq) returns (SurveyInfoResp);
+  // any user profile is in the study and one state matches condition:
+  rpc HasParticipantStateWithCondition(ProfilesWithConditionReq)
+      returns (ServiceStatus);
+
+  // ---> Study management
+  rpc CreateNewStudy(NewStudyRequest) returns (Study);
+  rpc GetAllStudies(influenzanet.shared.TokenInfos) returns (Studies);
+  rpc GetStudy(StudyReferenceReq) returns (Study);
+  // add, update and remove study members (and roles):
+  rpc SaveStudyMember(StudyMemberReq) returns (Study);
+  rpc RemoveStudyMember(StudyMemberReq) returns (Study);
+  rpc SaveStudyRules(StudyRulesReq) returns (Study);
+  rpc SaveStudyStatus(StudyStatusReq) returns (Study);
+  rpc SaveStudyProps(StudyPropsReq) returns (Study);
+  rpc SaveSurveyToStudy(AddSurveyReq) returns (Survey);
+  rpc GetSurveyDefForStudy(SurveyReferenceRequest) returns (Survey);
+  rpc RemoveSurveyFromStudy(SurveyReferenceRequest) returns (ServiceStatus);
+  rpc DeleteStudy(StudyReferenceReq) returns (ServiceStatus);
+  // <---
+
+  rpc GetStudyResponseStatistics(SurveyResponseQuery)
+      returns (StudyResponseStatistics);
+  rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
+}
+
+message SurveyResponseQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+  int64 from = 4;
+  int64 until = 5;
+  // to query specific survey engine versions for example:
+  map<string, string> context_query = 6;
+}
+
+message StudyResponseStatistics {
+  string study_key = 1;
+  map<string, int64> survey_response_counts = 6;
+}
+
+message ProfilesWithConditionReq {
+  string instance_id = 1;
+  string studyKey = 2;
+  repeated string profile_ids = 3;
+  // evaluate this expression for profiles if and until any of them fulfilles
+  ExpressionArg condition = 4;
+}
+
+message ServiceStatus {
+  enum StatusValue {
+    NORMAL = 0;
+    PROBLEM = 1;
+  }
+  StatusValue status = 1;
+  string msg = 2;
+  string version = 3;
+}
+
+message NewStudyRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  Study study = 2;
+}
+
+message SurveyAndContext {
+  Survey survey = 1;
+  SurveyContext context = 2;
+  SurveyResponse prefill = 3;
+}
+
+message StudyReferenceReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+}
+
+message SurveyInfoResp {
+  message SurveyInfo {
+    string key = 1;
+    repeated LocalisedObject name = 2;
+    repeated LocalisedObject description = 3;
+  }
+  repeated SurveyInfo infos = 1;
+}
+
+message AddSurveyReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  Survey survey = 3;
+}
+
+message SubmitResponseReq {
+  influenzanet.shared.TokenInfos token = 1;
+  // identifies the user who is submitting
+  string study_key = 2;
+  SurveyResponse response = 3;
+}
+
+message EnterStudyRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+}
+
+message LeaveStudyMsg {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+}
+
+message SurveyReferenceRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+}
+
+message PostponeSurveyRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+  int64 delay = 4;
+}
+
+message StatusReportRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  SurveyResponse status_survey = 2;
+}
+
+message GetStudiesForUserReq { influenzanet.shared.TokenInfos token = 1; }
+
+message Studies { repeated Study studies = 1; }
+
+message StudyMemberReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  Study.Member member = 3;
+}
+
+message StudyRulesReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  repeated Expression rules = 3;
+}
+
+message StudyStatusReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string new_status = 3;
+}
+
+message StudyPropsReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  Study.Props props = 3;
+}
