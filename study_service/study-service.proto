@@ -111,6 +111,7 @@ message SurveyInfoResp {
     string key = 1;
     repeated LocalisedObject name = 2;
     repeated LocalisedObject description = 3;
+    repeated LocalisedObject typical_duration = 4;
   }
   repeated SurveyInfo infos = 1;
 }
