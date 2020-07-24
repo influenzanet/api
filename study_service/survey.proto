@@ -20,13 +20,20 @@ message SurveyContextDef {
 
 message Survey {
   string id = 1;
-  repeated LocalisedObject name = 2;
+
+  message Props {
+    repeated LocalisedObject name = 1;
+    repeated LocalisedObject description = 2;
+    repeated LocalisedObject typical_duration = 3;
+  }
+
+  Props props = 2;
   SurveyVersion current = 3;
   repeated SurveyVersion history = 4;
-  repeated LocalisedObject description = 5;
-  repeated Expression prefill_rules = 6;
-  SurveyContextDef context_rules = 7;
-  MaxItemsPerPage max_items_per_page = 8;
+
+  repeated Expression prefill_rules = 5;
+  SurveyContextDef context_rules = 6;
+  MaxItemsPerPage max_items_per_page = 7;
 }
 
 message MaxItemsPerPage {

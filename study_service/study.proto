@@ -28,9 +28,16 @@ message Study {
     string username = 3;
   }
 
+  message Stats {
+    int64 participant_count = 1;
+    int64 response_count = 2;
+  }
+
   Props props = 5;
   repeated Expression rules = 6;
   repeated Member members = 7;
+
+  Stats stats = 8;
 }
 
 message Tag { repeated LocalisedObject label = 1; }
