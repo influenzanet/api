@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package influenzanet.logging_service;
+option go_package = "github.com/influenzanet/logging-service/pkg/api/logging_service";
+
+import "google/protobuf/empty.proto";
+import "shared/status.proto";
+import "shared/auth_info.proto";
+
+service LoggingServiceApi {
+  rpc Status(google.protobuf.Empty) returns (influenzanet.shared.ServiceStatus);
+
+  rpc SaveLogEvent(NewLogEvent) returns (influenzanet.shared.ServiceStatus);
+
+  rpc GetLogs(LogQuery) returns (stream LogEvent);
+  // TODO: update log settings, e.g., how often to remove log events
+}
+
+enum LogEventType {
+  NONE = 0;
+  SECURITY = 1;
+  ERROR = 2;
+  LOG = 3;
+}
+
+message NewLogEvent {
+  string instance_id = 1;
+  string origin = 2;
+  LogEventType event_type = 3;
+  string event_name = 4;
+  string user_id = 5;
+  string msg = 6;
+}
+
+message LogQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  LogEventType event_type = 2;
+  // TODO: time query
+}
+
+message LogEvent {
+  string id = 1;
+  int64 time = 2;
+  LogEventType event_type = 3;
+  string origin = 4;
+  string instance_id = 5;
+  string event_name = 6;
+  string user_id = 7;
+  string msg = 8;
+}
