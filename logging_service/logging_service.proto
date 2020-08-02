@@ -35,7 +35,11 @@ message NewLogEvent {
 message LogQuery {
   influenzanet.shared.TokenInfos token = 1;
   LogEventType event_type = 2;
-  // TODO: time query
+  int64 start = 3;
+  int64 end = 4;
+  string origin = 5;
+  string event_name = 6;
+  string user_id = 7;
 }
 
 message LogEvent {
