@@ -40,6 +40,7 @@ message ContactInfo {
 message ContactPreferences {
   bool subscribed_to_newsletter = 1;
   repeated string send_newsletter_to = 2; // list of contact info ids
+  int32 receive_weekly_message_day_of_week = 3;
 }
 
 message Profile {
