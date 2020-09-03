@@ -30,6 +30,7 @@ message SendEmailReq {
   string subject = 2;
   string content = 3;
   HeaderOverrides header_overrides = 4;
+  bool high_prio = 5;
 }
 
 message HeaderOverrides {
