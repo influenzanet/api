@@ -225,6 +225,7 @@ message CreateUserReq {
   string initial_password = 3;
   string preferred_language = 4;
   repeated string roles = 5;
+  bool use_2fa = 6;
 }
 
 message RoleMsg {
