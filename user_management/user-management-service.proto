@@ -195,6 +195,7 @@ message EmailChangeMsg {
   influenzanet.shared.TokenInfos token = 1;
   string new_email = 2;
   bool keep_old_email = 3;
+  string password = 4;
 }
 
 message LanguageChangeMsg {
