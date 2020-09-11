@@ -57,6 +57,7 @@ message SendEmailReq {
   string study_key = 4;
   string preferred_language = 5;
   map<string, string> content_infos = 6;
+  bool use_low_prio = 7;
 }
 
 message AutoMessage {
