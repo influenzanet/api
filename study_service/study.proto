@@ -48,6 +48,18 @@ message AssignedSurvey {
   int64 valid_until = 3;
   string study_key = 4;
   string category = 5;
+  string profile_id = 6;
 }
 
-message AssignedSurveys { repeated AssignedSurvey surveys = 1; }
+message SurveyInfo {
+  string study_key = 1;
+  string survey_key = 2;
+  repeated LocalisedObject name = 3;
+  repeated LocalisedObject description = 4;
+  repeated LocalisedObject typical_duration = 5;
+}
+
+message AssignedSurveys {
+  repeated AssignedSurvey surveys = 1;
+  repeated SurveyInfo survey_infos = 2;
+}

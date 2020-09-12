@@ -106,15 +106,7 @@ message StudyReferenceReq {
   string study_key = 2;
 }
 
-message SurveyInfoResp {
-  message SurveyInfo {
-    string key = 1;
-    repeated LocalisedObject name = 2;
-    repeated LocalisedObject description = 3;
-    repeated LocalisedObject typical_duration = 4;
-  }
-  repeated SurveyInfo infos = 1;
-}
+message SurveyInfoResp { repeated SurveyInfo infos = 1; }
 
 message AddSurveyReq {
   influenzanet.shared.TokenInfos token = 1;
