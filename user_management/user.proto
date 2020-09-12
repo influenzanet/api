@@ -52,4 +52,5 @@ message Profile {
                                   // consent to enter data for this indivildual
   string avatar_id = 4;           // id of predifined avatar
   int64 created_at = 5;           // timestamp of profile creation
+  bool main_profile = 6;          // if this is the user's main profile
 }

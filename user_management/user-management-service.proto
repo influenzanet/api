@@ -16,7 +16,6 @@ service UserManagementApi {
   rpc LoginWithEmail(LoginWithEmailMsg) returns (LoginResponse);
 
   rpc SignupWithEmail(SignupWithEmailMsg) returns (TokenResponse);
-  rpc SwitchProfile(SwitchProfileRequest) returns (TokenResponse);
   rpc ValidateJWT(JWTRequest) returns (influenzanet.shared.TokenInfos);
   rpc RenewJWT(RefreshJWTRequest) returns (TokenResponse);
   rpc RevokeAllRefreshTokens(RevokeRefreshTokensReq) returns (ServiceStatus);
@@ -143,12 +142,6 @@ message RefreshTokenRequest {
 
 message AppTokenRequest { string token = 1; }
 message AppTokenValidation { repeated string instances = 1; }
-
-message SwitchProfileRequest {
-  influenzanet.shared.TokenInfos token = 1;
-  string profile_id = 2;
-  string refresh_token = 3;
-}
 
 message ProfileRequest {
   influenzanet.shared.TokenInfos token = 1;
