@@ -119,22 +119,26 @@ message SubmitResponseReq {
   // identifies the user who is submitting
   string study_key = 2;
   SurveyResponse response = 3;
+  string profile_id = 4;
 }
 
 message EnterStudyRequest {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
+  string profile_id = 3;
 }
 
 message LeaveStudyMsg {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
+  string profile_id = 3;
 }
 
 message SurveyReferenceRequest {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   string survey_key = 3;
+  string profile_id = 4;
 }
 
 message PostponeSurveyRequest {
@@ -142,11 +146,13 @@ message PostponeSurveyRequest {
   string study_key = 2;
   string survey_key = 3;
   int64 delay = 4;
+  string profile_id = 5;
 }
 
 message StatusReportRequest {
   influenzanet.shared.TokenInfos token = 1;
   SurveyResponse status_survey = 2;
+  string profile_id = 3;
 }
 
 message GetStudiesForUserReq { influenzanet.shared.TokenInfos token = 1; }
