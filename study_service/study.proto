@@ -32,12 +32,19 @@ message Study {
     int64 participant_count = 1;
     int64 response_count = 2;
   }
-
   Props props = 5;
   repeated Expression rules = 6;
   repeated Member members = 7;
 
   Stats stats = 8;
+}
+
+message StudyForUser {
+  string key = 1; // user defined unique study identifier
+  string status = 2;
+  Study.Props props = 3;
+  Study.Stats stats = 4;
+  repeated string profile_ids = 5;
 }
 
 message Tag { repeated LocalisedObject label = 1; }

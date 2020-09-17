@@ -27,7 +27,7 @@ service StudyServiceApi {
       returns (ServiceStatus);
 
   // for all profiles (also not active studies):
-  rpc GetStudiesForUser(GetStudiesForUserReq) returns (Studies);
+  rpc GetStudiesForUser(GetStudiesForUserReq) returns (StudiesForUser);
   // all active studies even if user not in:
   rpc GetActiveStudies(influenzanet.shared.TokenInfos) returns (Studies);
   // get info about surveys in a study:
@@ -56,6 +56,8 @@ service StudyServiceApi {
       returns (StudyResponseStatistics);
   rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
 }
+
+message StudiesForUser { repeated StudyForUser studies = 1; }
 
 message SurveyResponseQuery {
   influenzanet.shared.TokenInfos token = 1;
