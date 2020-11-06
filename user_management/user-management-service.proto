@@ -228,7 +228,18 @@ message RoleMsg {
   string role = 3;
 }
 
-message StreamUsersMsg { string instance_id = 1; }
+message StreamUsersMsg {
+  string instance_id = 1;
+
+  message Filters {
+    bool use_reminder_weekday_filter = 1;
+    int32 reminder_weekday = 2;
+
+    bool only_confirmed_accounts = 3;
+  }
+  Filters filters = 2;
+}
+
 message FindNonParticipantUsersMsg { influenzanet.shared.TokenInfos token = 1; }
 
 message UserListMsg { repeated inf.user.User users = 1; }
