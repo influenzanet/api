@@ -10,6 +10,7 @@ message SurveyResponse {
   repeated SurveyItemResponse responses = 4;
   map<string, string> context =
       5; // e.g. to store location and other context data
+  string version_id = 6;
 }
 
 message SurveyResponses { repeated SurveyResponse responses = 1; }

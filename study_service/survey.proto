@@ -46,6 +46,7 @@ message SurveyVersion {
   int64 published = 1;
   int64 unpublished = 2;
   SurveyItem survey_definition = 3;
+  string version_id = 4;
 }
 
 message SurveyItem {
