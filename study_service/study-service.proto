@@ -50,6 +50,8 @@ service StudyServiceApi {
   rpc GetSurveyDefForStudy(SurveyReferenceRequest) returns (Survey);
   rpc RemoveSurveyFromStudy(SurveyReferenceRequest) returns (ServiceStatus);
   rpc DeleteStudy(StudyReferenceReq) returns (ServiceStatus);
+
+  rpc RunRules(StudyRulesReq) returns (RuleRunSummary);
   // <---
 
   rpc GetStudyResponseStatistics(SurveyResponseQuery)
@@ -183,4 +185,10 @@ message StudyPropsReq {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   Study.Props props = 3;
+}
+
+message RuleRunSummary {
+  int32 participant_count = 1;
+  repeated int32 participant_state_change_per_rule = 2;
+  int64 duration = 3;
 }
