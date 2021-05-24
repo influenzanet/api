@@ -54,7 +54,7 @@ message SurveyVersionPreview {
 message SurveyQuestion {
   string key = 1;
   string title = 2;
-  string question_types = 3;
+  string question_type = 3;
   repeated ResponseDef responses = 4;
 }
 
