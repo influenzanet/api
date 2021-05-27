@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package influenzanet.study_service;
+option go_package = "github.com/influenzanet/study-service/pkg/api";
+import "shared/auth_info.proto";
+
+message Chunk {
+  bytes chunk = 1;
+}
+
+message ResponseExportQuery {
+    message IncludeMeta {
+        bool position = 1;
+        bool item_version = 2;
+        bool init_times = 3;
+        bool displayed_times = 4;
+        bool responsed_times = 5;
+    }
+
+    influenzanet.shared.TokenInfos token = 1;
+    string study_key = 2;
+    string survey_key = 3;
+    int64 from = 4;
+    int64 until = 5;
+    IncludeMeta include_meta = 6;
+    bool short_question_keys = 7;
+    string separator = 8;
+}
+
+message SurveyInfoExportQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+  string preview_language = 4;
+  bool short_question_keys = 5;
+}
+
+message SurveyInfoExport {
+  string key = 1;
+  repeated SurveyVersionPreview versions = 2;
+}
+
+message SurveyVersionPreview {
+  string version_id = 1;
+  int64 published = 2;
+  int64 unpublished = 3;
+  repeated SurveyQuestionPreview questions = 4;
+}
+
+message SurveyQuestionPreview {
+  string key = 1;
+  string title = 2;
+  string question_type = 3;
+  repeated ResponseDefPreview responses = 4;
+}
+
+message ResponseDefPreview {
+  string key = 1;
+  string response_types = 2;
+  string label = 3;
+  repeated ResponseOptionPreview options = 4;
+}
+
+message ResponseOptionPreview {
+  string key = 1;
+  string option_type = 2;
+  string label = 3;
+}

@@ -6,6 +6,7 @@ option go_package = "github.com/influenzanet/study-service/pkg/api";
 
 import "shared/auth_info.proto";
 import "study_service/study.proto";
+import "study_service/exporter.proto";
 import "study_service/survey.proto";
 import "study_service/expression.proto";
 import "study_service/survey-response.proto";
@@ -54,9 +55,15 @@ service StudyServiceApi {
   rpc RunRules(StudyRulesReq) returns (RuleRunSummary);
   // <---
 
+  // Data access:
   rpc GetStudyResponseStatistics(SurveyResponseQuery)
       returns (StudyResponseStatistics);
   rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
+
+  rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
+  rpc GetResponsesLongFormatCSV(ResponseExportQuery) returns (stream Chunk);
+  rpc GetSurveyInfoPreviewCSV(SurveyInfoExportQuery) returns (stream Chunk);
+  rpc GetSurveyInfoPreview(SurveyInfoExportQuery) returns (SurveyInfoExport);
 }
 
 message StudiesForUser { repeated StudyForUser studies = 1; }
