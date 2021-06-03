@@ -220,6 +220,7 @@ message CreateUserReq {
   string preferred_language = 4;
   repeated string roles = 5;
   bool use_2fa = 6;
+  repeated string profile_names = 7; // Optional list of profiles that should be added for the user right at creation. First entry will be the main profiles name.
 }
 
 message RoleMsg {
