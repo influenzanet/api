@@ -14,6 +14,7 @@ service UserManagementApi {
   rpc SendVerificationCode(SendVerificationCodeReq) returns (ServiceStatus);
   rpc AutoValidateTempToken(AutoValidateReq) returns (AutoValidateResponse);
   rpc LoginWithEmail(LoginWithEmailMsg) returns (LoginResponse);
+  rpc LoginWithExternalIDP(LoginWithExternalIDPMsg) returns (LoginResponse);
 
   rpc SignupWithEmail(SignupWithEmailMsg) returns (TokenResponse);
   rpc ValidateJWT(JWTRequest) returns (influenzanet.shared.TokenInfos);
@@ -100,6 +101,15 @@ message LoginWithEmailMsg {
   string instance_id = 3;
   bool as_participant = 4;
   string verification_code = 5;
+}
+
+message LoginWithExternalIDPMsg {
+  string instance_id = 1;
+  string email = 2;
+  string role = 3;
+  string customer = 4;
+  string idp = 5;
+  string group_info = 6;
 }
 
 message AutoValidateReq {
