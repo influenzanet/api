@@ -41,6 +41,7 @@ message ServiceStatus {
 message SendMessageToAllUsersReq {
   influenzanet.shared.TokenInfos token = 1;
   EmailTemplate template = 2;
+  bool ignore_weekday = 3;
 }
 
 message SendMessageToStudyParticipantsReq {
@@ -48,6 +49,7 @@ message SendMessageToStudyParticipantsReq {
   EmailTemplate template = 2;
   string study_key = 3;
   ExpressionArg condition = 4;
+  bool ignore_weekday = 5;
 }
 
 message SendEmailReq {
