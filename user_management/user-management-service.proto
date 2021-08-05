@@ -231,6 +231,10 @@ message CreateUserReq {
   repeated string roles = 5;
   bool use_2fa = 6;
   repeated string profile_names = 7; // Optional list of profiles that should be added for the user right at creation. First entry will be the main profiles name.
+
+  // When migrating previous account, that should not be confirmed
+  int64 account_confirmed_at = 8;
+  int64 created_at = 9;
 }
 
 message RoleMsg {
