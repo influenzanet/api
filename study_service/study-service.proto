@@ -26,6 +26,12 @@ service StudyServiceApi {
   rpc LeaveStudy(LeaveStudyMsg) returns (AssignedSurveys);
   rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
       returns (ServiceStatus);
+  rpc UploadParticipantFile(UploadParticipantFileReq) returns (FileInfo);
+  //rpc GetParticipantFiles(GetParticipantFilesReq) returns (GetParticipantFilesResp);
+  //rpc GetParticipantFile(GetParticipantFileReq) returns (stream Chunk);
+  //rpc GetParticipantFilePreview(GetParticipantFileReq) returns (stream Chunk);
+  //rpc DeleteParticipantFiles(DeleteParticipantFilesReq) returns (DeleteParticipantFilesResp);
+  //rpc BulkDownloadParticipantFiles(BulkDownloadParticipantFilesReq) returns (stream Chunk);
 
   // for all profiles (also not active studies):
   rpc GetStudiesForUser(GetStudiesForUserReq) returns (StudiesForUser);
@@ -67,6 +73,49 @@ service StudyServiceApi {
 }
 
 message StudiesForUser { repeated StudyForUser studies = 1; }
+
+message UploadParticipantFileReq {
+  message Info {
+    influenzanet.shared.TokenInfos token = 1;
+    string study_key = 2;
+    string survey_key = 3;
+
+    oneof participant {
+      string profile_id = 4;
+      string participant_id = 5; // if researcher upload for participant directly
+    }
+
+    string file_type = 6;
+    bool visible_to_participant = 7;
+    string sub_study = 8;
+  }
+
+  oneof data {
+    Info info = 1;
+    bytes chunk = 2;
+  }
+}
+
+message FileReference {
+  string id = 1; // DB id of the resource
+  string type = 2; // it is referenced by survey response, or other object (like study)
+  int64 time = 3; // when reference was created
+}
+
+message FileInfo {
+  string id = 1;
+  string status = 2;
+  string path = 3;
+  string preview_path = 4;
+  string sub_study = 5;
+  int64 submitted_at = 6;
+  string file_type = 7;
+  bool visible_to_participant = 8;
+  string name = 9;
+  repeated FileReference referenced_in = 10;
+  int32 size = 11;
+}
+
 
 message SurveyResponseQuery {
   influenzanet.shared.TokenInfos token = 1;

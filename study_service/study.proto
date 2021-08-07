@@ -37,6 +37,8 @@ message Study {
   repeated Member members = 7;
 
   Stats stats = 8;
+
+  Expression participant_file_upload_rule = 9;
 }
 
 message StudyForUser {
