@@ -26,7 +26,7 @@ service StudyServiceApi {
   rpc LeaveStudy(LeaveStudyMsg) returns (AssignedSurveys);
   rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
       returns (ServiceStatus);
-  rpc UploadParticipantFile(UploadParticipantFileReq) returns (FileInfo);
+  rpc UploadParticipantFile(stream UploadParticipantFileReq) returns (FileInfo);
   //rpc GetParticipantFiles(GetParticipantFilesReq) returns (GetParticipantFilesResp);
   //rpc GetParticipantFile(GetParticipantFileReq) returns (stream Chunk);
   //rpc GetParticipantFilePreview(GetParticipantFileReq) returns (stream Chunk);
