@@ -78,7 +78,7 @@ message UploadParticipantFileReq {
   message Info {
     influenzanet.shared.TokenInfos token = 1;
     string study_key = 2;
-    string survey_key = 3;
+    string sub_study = 3;
 
     oneof participant {
       string profile_id = 4;
@@ -87,7 +87,7 @@ message UploadParticipantFileReq {
 
     string file_type = 6;
     bool visible_to_participant = 7;
-    string sub_study = 8;
+
   }
 
   oneof data {
@@ -96,7 +96,7 @@ message UploadParticipantFileReq {
   }
 }
 
-message FileReference {
+message FileObjectReference {
   string id = 1; // DB id of the resource
   string type = 2; // it is referenced by survey response, or other object (like study)
   int64 time = 3; // when reference was created
@@ -104,16 +104,18 @@ message FileReference {
 
 message FileInfo {
   string id = 1;
-  string status = 2;
-  string path = 3;
-  string preview_path = 4;
-  string sub_study = 5;
-  int64 submitted_at = 6;
-  string file_type = 7;
-  bool visible_to_participant = 8;
-  string name = 9;
-  repeated FileReference referenced_in = 10;
-  int32 size = 11;
+  string participant_id = 2;
+  string uploaded_by = 3; // if not uploaded by the participant
+  string status = 4;
+  string path = 5;
+  string preview_path = 6;
+  string sub_study = 7;
+  int64 submitted_at = 8;
+  string file_type = 9;
+  bool visible_to_participant = 10;
+  string name = 11;
+  repeated FileObjectReference referenced_in = 12;
+  int32 size = 13;
 }
 
 
