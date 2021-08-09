@@ -74,6 +74,12 @@ service StudyServiceApi {
 
 message StudiesForUser { repeated StudyForUser studies = 1; }
 
+message FileType {
+  string type = 1;
+  string subtype = 2;
+  string value = 3;
+}
+
 message UploadParticipantFileReq {
   message Info {
     influenzanet.shared.TokenInfos token = 1;
@@ -85,9 +91,8 @@ message UploadParticipantFileReq {
       string participant_id = 5; // if researcher upload for participant directly
     }
 
-    string file_type = 6;
+    FileType file_type = 6;
     bool visible_to_participant = 7;
-
   }
 
   oneof data {
