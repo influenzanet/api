@@ -68,6 +68,7 @@ service StudyServiceApi {
 
   rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesLongFormatCSV(ResponseExportQuery) returns (stream Chunk);
+  rpc GetResponsesFlatJSON(ResponseExportQuery) returns (stream Chunk);
   rpc GetSurveyInfoPreviewCSV(SurveyInfoExportQuery) returns (stream Chunk);
   rpc GetSurveyInfoPreview(SurveyInfoExportQuery) returns (SurveyInfoExport);
 }
