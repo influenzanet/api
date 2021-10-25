@@ -38,7 +38,12 @@ message Study {
 
   Stats stats = 8;
 
-  Expression participant_file_upload_rule = 9;
+  message StudyConfig {
+    string id_mapping_method = 1;
+    Expression participant_file_upload_rule = 2;
+  }
+
+  StudyConfig congfigs = 10;
 }
 
 message StudyForUser {
