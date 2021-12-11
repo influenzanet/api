@@ -11,6 +11,8 @@ message SurveyResponse {
   map<string, string> context =
       5; // e.g. to store location and other context data
   string version_id = 6;
+  int64 opened_at = 7;
+  string id = 8;
 }
 
 message SurveyResponses { repeated SurveyResponse responses = 1; }
