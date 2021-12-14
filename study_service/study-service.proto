@@ -191,6 +191,7 @@ message SubmitResponseReq {
   string study_key = 2;
   SurveyResponse response = 3;
   string profile_id = 4;
+  string temporary_participant_id = 5;
 }
 
 message EnterStudyRequest {
@@ -210,6 +211,7 @@ message SurveyReferenceRequest {
   string study_key = 2;
   string survey_key = 3;
   string profile_id = 4;
+  string temporary_participant_id = 5;
 }
 
 message PostponeSurveyRequest {

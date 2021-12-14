@@ -35,6 +35,7 @@ message Survey {
   repeated Expression prefill_rules = 5;
   SurveyContextDef context_rules = 6;
   MaxItemsPerPage max_items_per_page = 7;
+  string available_for = 8; // public, temporary_participants, active_participants
 }
 
 message MaxItemsPerPage {
