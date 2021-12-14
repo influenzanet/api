@@ -30,7 +30,7 @@ service StudyServiceApi {
   //rpc GetParticipantFilePreview(GetParticipantFileReq) returns (stream Chunk);
   //rpc DeleteParticipantFiles(DeleteParticipantFilesReq) returns (DeleteParticipantFilesResp);
   //rpc BulkDownloadParticipantFiles(BulkDownloadParticipantFilesReq) returns (stream Chunk);
-  rpc RegisterTemporaryParticipant(google.protobuf.Empty) returns (RegisterTempParticipantResponse);
+  rpc RegisterTemporaryParticipant(RegisterTempParticipantReq) returns (RegisterTempParticipantResponse);
   rpc ConvertTemporaryToParticipant(ConvertTempParticipantReq) returns (ServiceStatus);
 
   // for all profiles (also not active studies):
@@ -246,12 +246,18 @@ message RuleRunSummary {
   int64 duration = 3;
 }
 
-message RegisterTempParticipantResponse {
-  string temporary_participant_id = 1;
-}
-
 message ConvertTempParticipantReq {
   influenzanet.shared.TokenInfos token = 1;
-  string temporary_participant_id = 2;
-  string profile_id = 3;
+  string study_key = 2;
+  string temporary_participant_id = 3;
+  string profile_id = 4;
+}
+
+message RegisterTempParticipantReq {
+  string instance_id = 1;
+  string study_key = 2;
+}
+
+message RegisterTempParticipantResponse {
+  string temporary_participant_id = 1;
 }
