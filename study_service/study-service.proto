@@ -20,8 +20,6 @@ service StudyServiceApi {
   rpc GetAssignedSurveys(influenzanet.shared.TokenInfos)
       returns (AssignedSurveys);
   rpc GetAssignedSurvey(SurveyReferenceRequest) returns (SurveyAndContext);
-  rpc PostponeSurvey(PostponeSurveyRequest) returns (AssignedSurveys);
-  rpc SubmitStatusReport(StatusReportRequest) returns (AssignedSurveys);
   rpc SubmitResponse(SubmitResponseReq) returns (AssignedSurveys);
   rpc LeaveStudy(LeaveStudyMsg) returns (AssignedSurveys);
   rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
@@ -212,20 +210,6 @@ message SurveyReferenceRequest {
   string survey_key = 3;
   string profile_id = 4;
   string temporary_participant_id = 5;
-}
-
-message PostponeSurveyRequest {
-  influenzanet.shared.TokenInfos token = 1;
-  string study_key = 2;
-  string survey_key = 3;
-  int64 delay = 4;
-  string profile_id = 5;
-}
-
-message StatusReportRequest {
-  influenzanet.shared.TokenInfos token = 1;
-  SurveyResponse status_survey = 2;
-  string profile_id = 3;
 }
 
 message GetStudiesForUserReq { influenzanet.shared.TokenInfos token = 1; }
