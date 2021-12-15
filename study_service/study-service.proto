@@ -253,8 +253,9 @@ message RuleRunSummary {
 message ConvertTempParticipantReq {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
-  string temporary_participant_id = 3;
-  string profile_id = 4;
+  string profile_id = 3;
+  string temporary_participant_id = 4;
+  int64 timestamp = 5; // second piece of info to confirm knowledge of the participant
 }
 
 message RegisterTempParticipantReq {
@@ -264,6 +265,7 @@ message RegisterTempParticipantReq {
 
 message RegisterTempParticipantResponse {
   string temporary_participant_id = 1;
+  int64 timestamp = 2;
 }
 
 message GetAssignedSurveysForTemporaryParticipantReq {
