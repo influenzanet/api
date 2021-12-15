@@ -192,6 +192,7 @@ message SubmitResponseReq {
   SurveyResponse response = 3;
   string profile_id = 4;
   string temporary_participant_id = 5;
+  string instance_id = 6;
 }
 
 message EnterStudyRequest {
