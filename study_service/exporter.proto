@@ -17,6 +17,16 @@ message ResponseExportQuery {
         bool responsed_times = 5;
     }
 
+    message ItemFilter {
+      enum Mode {
+        EXCLUDE = 0;
+        INCLUDE = 1;
+      }
+
+      repeated string keys = 1;
+      Mode mode = 2;
+    }
+
     influenzanet.shared.TokenInfos token = 1;
     string study_key = 2;
     string survey_key = 3;
@@ -25,6 +35,7 @@ message ResponseExportQuery {
     IncludeMeta include_meta = 6;
     bool short_question_keys = 7;
     string separator = 8;
+    ItemFilter item_filter = 9;
 }
 
 message SurveyInfoExportQuery {
