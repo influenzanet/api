@@ -43,7 +43,7 @@ message Study {
     Expression participant_file_upload_rule = 2;
   }
 
-  Configs congfigs = 10;
+  Configs configs = 10;
 }
 
 message StudyForUser {
