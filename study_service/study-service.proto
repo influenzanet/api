@@ -191,8 +191,10 @@ message SubmitResponseReq {
   string study_key = 2;
   SurveyResponse response = 3;
   string profile_id = 4;
-  string temporary_participant_id = 5;
-  string instance_id = 6;
+  // When subbmitting for temp participant:
+  string instance_id = 5;
+  string temporary_participant_id = 6;
+  int64 temporary_participant_timestamp = 7;
 }
 
 message EnterStudyRequest {
