@@ -44,6 +44,10 @@ service StudyServiceApi {
   // any user profile is in the study and one state matches condition:
   rpc HasParticipantStateWithCondition(ProfilesWithConditionReq)
       returns (ServiceStatus);
+  rpc GetParticipantMessages(GetParticipantMessagesReq)
+      returns (GetParticipantMessagesResp);
+  rpc DeleteMessageFromParticipant(DeleteMessageFromParticipantReq)
+      returns (ServiceStatus);
 
   // ---> Study management
   rpc CreateNewStudy(NewStudyRequest) returns (Study);
@@ -148,6 +152,27 @@ message ProfilesWithConditionReq {
   repeated string profile_ids = 3;
   // evaluate this expression for profiles if and until any of them fulfilles
   ExpressionArg condition = 4;
+}
+
+message GetParticipantMessagesReq {
+  string instance_id = 1;
+  string studyKey = 2;
+  string profile_id = 3;
+}
+
+message GetParticipantMessagesResp {
+  message Messages {
+    string id = 1;
+    string type = 2;
+  }
+  repeated Messages messages = 1;
+}
+
+message DeleteMessagesFromParticipantReq {
+  string instance_id = 1;
+  string studyKey = 2;
+  string profile_id = 3;
+  repeated string message_ids = 4;
 }
 
 message ServiceStatus {
