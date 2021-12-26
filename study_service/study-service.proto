@@ -46,7 +46,7 @@ service StudyServiceApi {
       returns (ServiceStatus);
   rpc GetParticipantMessages(GetParticipantMessagesReq)
       returns (GetParticipantMessagesResp);
-  rpc DeleteMessageFromParticipant(DeleteMessageFromParticipantReq)
+  rpc DeleteMessageFromParticipant(DeleteMessagesFromParticipantReq)
       returns (ServiceStatus);
 
   // ---> Study management
