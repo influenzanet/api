@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package influenzanet.study_service;
+
+option go_package = "github.com/influenzanet/study-service/pkg/api";
+
+message Report {
+  string id = 1;  // db id
+  string key = 2;
+  string participant_id = 3;
+  string response_id = 4;
+  int64 timestamp = 5;
+
+  message Data {
+    string key = 1;
+    string value = 2;
+    string dtype = 3;
+  }
+
+  repeated Data data = 6;
+}

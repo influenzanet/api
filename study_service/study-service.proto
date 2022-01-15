@@ -10,6 +10,8 @@ import "study_service/exporter.proto";
 import "study_service/survey.proto";
 import "study_service/expression.proto";
 import "study_service/survey-response.proto";
+import "study_service/participant-state.proto";
+import "study_service/report.proto";
 import "google/protobuf/empty.proto";
 
 service StudyServiceApi {
@@ -48,6 +50,7 @@ service StudyServiceApi {
       returns (GetParticipantMessagesResp);
   rpc DeleteMessagesFromParticipant(DeleteMessagesFromParticipantReq)
       returns (ServiceStatus);
+  rpc GetReportsForUser(GetReportsForUserReq) returns (ReportHistory);
 
   // ---> Study management
   rpc CreateNewStudy(NewStudyRequest) returns (Study);
@@ -71,6 +74,8 @@ service StudyServiceApi {
   rpc GetStudyResponseStatistics(SurveyResponseQuery)
       returns (StudyResponseStatistics);
   rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
+  rpc StreamParticipantStates(ParticipantStateQuery) returns (stream ParticipantState);
+  rpc StreamReportHistory(ReportHistoryQuery) returns (stream Report);
 
   rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesLongFormatCSV(ResponseExportQuery) returns (stream Chunk);
@@ -139,6 +144,21 @@ message SurveyResponseQuery {
   int64 until = 5;
   // to query specific survey engine versions for example:
   map<string, string> context_query = 6;
+}
+
+message ReportHistoryQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string report_key = 3;
+  int64 from = 4;
+  int64 until = 5;
+  string participant_id = 6;
+}
+
+message ParticipantStateQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string status = 3;
 }
 
 message StudyResponseStatistics {
@@ -241,6 +261,18 @@ message SurveyReferenceRequest {
   string profile_id = 4;
   influenzanet.shared.TokenInfos token = 5;
   string temporary_participant_id = 6;
+}
+
+message GetReportsForUserReq {
+  influenzanet.shared.TokenInfos token = 1;
+  repeated string only_for_profiles = 2; // if not defined return for all profiles
+  string report_key_filter = 3;
+  int64 from = 4; // optional time filters
+  int64 until = 5;
+}
+
+message ReportHistory {
+  repeated Report reports = 1;
 }
 
 message GetStudiesForUserReq { influenzanet.shared.TokenInfos token = 1; }

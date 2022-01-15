@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package influenzanet.study_service;
+
+option go_package = "github.com/influenzanet/study-service/pkg/api";
+
+import "study_service/study.proto";
+
+message ParticipantState {
+  string id = 1;  // db id
+  string participant_id = 2;
+  string entered_at = 3;
+  string study_status = 4;
+  map<string, string> flags = 5;
+  repeated AssignedSurvey assigned_surveys = 6;
+  map<string, int64> last_submissions = 7;
+}
