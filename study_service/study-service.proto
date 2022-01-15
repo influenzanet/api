@@ -266,9 +266,10 @@ message SurveyReferenceRequest {
 message GetReportsForUserReq {
   influenzanet.shared.TokenInfos token = 1;
   repeated string only_for_profiles = 2; // if not defined return for all profiles
-  string report_key_filter = 3;
-  int64 from = 4; // optional time filters
-  int64 until = 5;
+  repeated string only_for_studies = 3; // if not defined return for all profiles
+  string report_key_filter = 4;
+  int64 from = 5; // optional time filters
+  int64 until = 6;
 }
 
 message ReportHistory {
