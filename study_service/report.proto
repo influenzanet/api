@@ -16,6 +16,8 @@ message Report {
   string participant_id = 3;
   string response_id = 4;
   int64 timestamp = 5;
-  string study_key = 6;
-  repeated Data data = 7;
+  repeated Data data = 6;
+  // extra info about report to assign to study and profile:
+  string study_key = 7;
+  string profile_id = 8;
 }
