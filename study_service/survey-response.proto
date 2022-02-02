@@ -24,6 +24,7 @@ message SurveyItemResponse {
   repeated SurveyItemResponse items = 3;
   // for single items:
   ResponseItem response = 4;
+  string confidential_mode = 5;
 }
 
 message ResponseItem {

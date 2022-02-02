@@ -51,6 +51,11 @@ message SurveyVersion {
   string version_id = 4;
 }
 
+message SpecialMode {
+  bool active = 1;
+  string mode = 2;
+}
+
 message SurveyItem {
   string id = 1;
   string key = 2;
@@ -66,6 +71,7 @@ message SurveyItem {
   string type = 10;              // item/question type
   ItemComponent components = 11; // is a group component
   repeated Validation validations = 12;
+  string confidential_mode = 13; // "": not confidential, "add" / "replace"
 }
 
 message Validation {
