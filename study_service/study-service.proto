@@ -51,6 +51,7 @@ service StudyServiceApi {
   rpc DeleteMessagesFromParticipant(DeleteMessagesFromParticipantReq)
       returns (ServiceStatus);
   rpc GetReportsForUser(GetReportsForUserReq) returns (ReportHistory);
+  rpc RemoveConfidentialResponsesForProfiles(RemoveConfidentialResponsesForProfilesReq) returns (ServiceStatus);
 
   // ---> Study management
   rpc CreateNewStudy(NewStudyRequest) returns (Study);
@@ -270,6 +271,11 @@ message GetReportsForUserReq {
   string report_key_filter = 4;
   int64 from = 5; // optional time filters
   int64 until = 6;
+}
+
+message RemoveConfidentialResponsesForProfilesReq {
+  influenzanet.shared.TokenInfos token = 1;
+  repeated string for_profiles = 2; // if not defined remove for all profiles
 }
 
 message ReportHistory {
