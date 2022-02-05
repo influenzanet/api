@@ -78,6 +78,7 @@ service StudyServiceApi {
   rpc StreamParticipantStates(ParticipantStateQuery) returns (stream ParticipantState);
   rpc StreamReportHistory(ReportHistoryQuery) returns (stream Report);
 
+  rpc GetConfidentialResponses(ConfidentialResponsesQuery) returns (ConfidentialResponses);
   rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesLongFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesFlatJSON(ResponseExportQuery) returns (stream Chunk);
@@ -338,4 +339,16 @@ message GetAssignedSurveysForTemporaryParticipantReq {
   string instance_id = 1;
   string study_key = 2;
   string temporary_participant_id = 3;
+}
+
+message ConfidentialResponsesQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  repeated string participant_ids = 3;
+  Expression condition = 4;
+  string key_filter = 5; // optional key filter to retrieve only for this one
+}
+
+message ConfidentialResponses {
+  repeated SurveyResponse responses = 1;
 }
