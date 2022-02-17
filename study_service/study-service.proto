@@ -27,11 +27,8 @@ service StudyServiceApi {
   rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
       returns (ServiceStatus);
   rpc UploadParticipantFile(stream UploadParticipantFileReq) returns (FileInfo);
-  //rpc GetParticipantFiles(GetParticipantFilesReq) returns (GetParticipantFilesResp);
-  //rpc GetParticipantFile(GetParticipantFileReq) returns (stream Chunk);
-  //rpc GetParticipantFilePreview(GetParticipantFileReq) returns (stream Chunk);
-  //rpc DeleteParticipantFiles(DeleteParticipantFilesReq) returns (DeleteParticipantFilesResp);
-  //rpc BulkDownloadParticipantFiles(BulkDownloadParticipantFilesReq) returns (stream Chunk);
+  rpc DeleteParticipantFiles(DeleteParticipantFilesReq) returns (ServiceStatus);
+  rpc GetParticipantFile(GetParticipantFileReq) returns (stream Chunk);
   rpc RegisterTemporaryParticipant(RegisterTempParticipantReq) returns (RegisterTempParticipantResponse);
   rpc ConvertTemporaryToParticipant(ConvertTempParticipantReq) returns (ServiceStatus);
   rpc GetAssignedSurveysForTemporaryParticipant(GetAssignedSurveysForTemporaryParticipantReq)
@@ -47,7 +44,9 @@ service StudyServiceApi {
   rpc HasParticipantStateWithCondition(ProfilesWithConditionReq)
       returns (ServiceStatus);
   rpc GetParticipantMessages(GetParticipantMessagesReq)
-      returns (GetParticipantMessagesResp);
+      returns (stream StudyMessage);
+  rpc GetResearcherMessages(google.protobuf.Empty)
+      returns (stream StudyMessage);
   rpc DeleteMessagesFromParticipant(DeleteMessagesFromParticipantReq)
       returns (ServiceStatus);
   rpc GetReportsForUser(GetReportsForUserReq) returns (ReportHistory);
@@ -77,6 +76,7 @@ service StudyServiceApi {
   rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
   rpc StreamParticipantStates(ParticipantStateQuery) returns (stream ParticipantState);
   rpc StreamReportHistory(ReportHistoryQuery) returns (stream Report);
+  rpc StreamParticipantFileInfos(FileInfoQuery) returns (stream FileInfo);
 
   rpc GetConfidentialResponses(ConfidentialResponsesQuery) returns (ConfidentialResponses);
   rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
@@ -115,6 +115,18 @@ message UploadParticipantFileReq {
   }
 }
 
+message GetParticipantFileReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string file_id = 3;
+}
+
+message DeleteParticipantFilesReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  repeated string file_ids = 3;
+}
+
 message FileObjectReference {
   string id = 1; // DB id of the resource
   string type = 2; // it is referenced by survey response, or other object (like study)
@@ -137,6 +149,10 @@ message FileInfo {
   int32 size = 13;
 }
 
+message FileInfos {
+  repeated FileInfo file_infos = 1;
+}
+
 
 message SurveyResponseQuery {
   influenzanet.shared.TokenInfos token = 1;
@@ -152,6 +168,15 @@ message ReportHistoryQuery {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   string report_key = 3;
+  int64 from = 4;
+  int64 until = 5;
+  string participant_id = 6;
+}
+
+message FileInfoQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string file_type = 3;
   int64 from = 4;
   int64 until = 5;
   string participant_id = 6;
@@ -182,12 +207,10 @@ message GetParticipantMessagesReq {
   string profile_id = 3;
 }
 
-message GetParticipantMessagesResp {
-  message Messages {
-    string id = 1;
-    string type = 2;
-  }
-  repeated Messages messages = 1;
+message StudyMessage {
+  string id = 1;
+  string type = 2;
+  map<string, string> payload = 3;
 }
 
 message DeleteMessagesFromParticipantReq {
