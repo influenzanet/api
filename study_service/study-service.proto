@@ -44,7 +44,7 @@ service StudyServiceApi {
   rpc HasParticipantStateWithCondition(ProfilesWithConditionReq)
       returns (ServiceStatus);
   rpc GetParticipantMessages(GetParticipantMessagesReq) returns (StudyMessages);
-  rpc GetResearcherMessages(google.protobuf.Empty) returns (StudyMessages);
+  rpc GetResearcherMessages(GetReseacherMessagesReq) returns (StudyMessages);
   rpc DeleteMessagesFromParticipant(DeleteMessagesFromParticipantReq)
       returns (ServiceStatus);
   rpc DeleteResearcherMessages(DeleteResearcherMessagesReq)
@@ -207,6 +207,10 @@ message GetParticipantMessagesReq {
   string profile_id = 3;
 }
 
+message GetReseacherMessagesReq {
+  string instance_id = 1;
+}
+
 message StudyMessage {
   string id = 1;
   string type = 2;
@@ -214,6 +218,7 @@ message StudyMessage {
   map<string, string> payload = 3;
   string study_key = 4;
   string participant_id = 5;
+  repeated string send_to = 6; // for researcher notifications
 }
 
 message StudyMessages {
