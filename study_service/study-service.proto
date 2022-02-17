@@ -43,11 +43,11 @@ service StudyServiceApi {
   // any user profile is in the study and one state matches condition:
   rpc HasParticipantStateWithCondition(ProfilesWithConditionReq)
       returns (ServiceStatus);
-  rpc GetParticipantMessages(GetParticipantMessagesReq)
-      returns (stream StudyMessage);
-  rpc GetResearcherMessages(google.protobuf.Empty)
-      returns (stream StudyMessage);
+  rpc GetParticipantMessages(GetParticipantMessagesReq) returns (StudyMessages);
+  rpc GetResearcherMessages(google.protobuf.Empty) returns (StudyMessages);
   rpc DeleteMessagesFromParticipant(DeleteMessagesFromParticipantReq)
+      returns (ServiceStatus);
+  rpc DeleteResearcherMessages(DeleteResearcherMessagesReq)
       returns (ServiceStatus);
   rpc GetReportsForUser(GetReportsForUserReq) returns (ReportHistory);
   rpc RemoveConfidentialResponsesForProfiles(RemoveConfidentialResponsesForProfilesReq) returns (ServiceStatus);
@@ -210,7 +210,14 @@ message GetParticipantMessagesReq {
 message StudyMessage {
   string id = 1;
   string type = 2;
+  // optional:
   map<string, string> payload = 3;
+  string study_key = 4;
+  string participant_id = 5;
+}
+
+message StudyMessages {
+  repeated StudyMessage messages = 1;
 }
 
 message DeleteMessagesFromParticipantReq {
@@ -218,6 +225,12 @@ message DeleteMessagesFromParticipantReq {
   string studyKey = 2;
   string profile_id = 3;
   repeated string message_ids = 4;
+}
+
+message DeleteResearcherMessagesReq {
+  string instance_id = 1;
+  string studyKey = 2;
+  repeated string message_ids = 3;
 }
 
 message ServiceStatus {
