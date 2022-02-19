@@ -68,6 +68,7 @@ service StudyServiceApi {
   rpc DeleteStudy(StudyReferenceReq) returns (ServiceStatus);
 
   rpc RunRules(StudyRulesReq) returns (RuleRunSummary);
+  rpc RunRulesForSingleParticipant(RunRulesForSingleParticipantReq) returns (RuleRunSummary);
   // <---
 
   // Data access:
@@ -338,6 +339,13 @@ message StudyRulesReq {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   repeated Expression rules = 3;
+}
+
+message RunRulesForSingleParticipantReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string participant_id = 3;
+  repeated Expression rules = 4;
 }
 
 message StudyStatusReq {
