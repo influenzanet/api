@@ -14,6 +14,7 @@ message ParticipantState {
   map<string, string> flags = 5;
   repeated AssignedSurvey assigned_surveys = 6;
   map<string, int64> last_submissions = 7;
+  string current_study_session = 8;
 }
 
 message ParticipantStates {
