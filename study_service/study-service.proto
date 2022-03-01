@@ -311,9 +311,10 @@ message GetReportsForUserReq {
   influenzanet.shared.TokenInfos token = 1;
   repeated string only_for_profiles = 2; // if not defined return for all profiles
   repeated string only_for_studies = 3; // if not defined return for all profiles
-  string report_key_filter = 4;
+  string report_key_filter = 4; // if only one report key should be looked up
   int64 from = 5; // optional time filters
   int64 until = 6;
+  repeated string ignore_reports = 7; // don't send back these reports
 }
 
 message RemoveConfidentialResponsesForProfilesReq {
