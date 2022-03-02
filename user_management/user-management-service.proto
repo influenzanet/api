@@ -93,6 +93,7 @@ message SignupWithEmailMsg {
   string preferred_language = 4;
   bool wants_newsletter = 5;
   bool use_2fa = 6;
+  string info_check = 7;
 }
 
 message LoginWithEmailMsg {
