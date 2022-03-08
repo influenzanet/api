@@ -34,6 +34,8 @@ service StudyServiceApi {
   rpc GetAssignedSurveysForTemporaryParticipant(GetAssignedSurveysForTemporaryParticipantReq)
       returns (AssignedSurveys);
 
+  rpc CreateReport(CreateReportReq) returns (ServiceStatus);
+
   // for all profiles (also not active studies):
   rpc GetStudiesForUser(GetStudiesForUserReq) returns (StudiesForUser);
   // all active studies even if user not in:
@@ -305,6 +307,13 @@ message SurveyReferenceRequest {
   string profile_id = 4;
   influenzanet.shared.TokenInfos token = 5;
   string temporary_participant_id = 6;
+}
+
+message CreateReportReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string profile_id = 3;
+  Report report = 4;
 }
 
 message GetReportsForUserReq {
