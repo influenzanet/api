@@ -15,8 +15,15 @@ message ParticipantState {
   repeated AssignedSurvey assigned_surveys = 6;
   map<string, int64> last_submissions = 7;
   string current_study_session = 8;
+  repeated ParticipantMessage messages = 9;
 }
 
 message ParticipantStates {
   repeated ParticipantState participant_states = 1;
+}
+
+message ParticipantMessage {
+  string id = 1;
+  string type = 2;
+  int64 scheduled_for = 3;
 }
