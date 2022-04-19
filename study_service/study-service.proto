@@ -61,6 +61,8 @@ service StudyServiceApi {
   // add, update and remove study members (and roles):
   rpc SaveStudyMember(StudyMemberReq) returns (Study);
   rpc RemoveStudyMember(StudyMemberReq) returns (Study);
+  rpc GetResearcherNotificationSubscriptions(GetResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
+  rpc UpdateResearcherNotificationSubscriptions(UpdateResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
   rpc SaveStudyRules(StudyRulesReq) returns (Study);
   rpc SaveStudyStatus(StudyStatusReq) returns (Study);
   rpc SaveStudyProps(StudyPropsReq) returns (Study);
@@ -122,6 +124,26 @@ message GetParticipantFileReq {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   string file_id = 3;
+}
+
+message Subscription {
+  string message_type = 1;
+  string email = 2;
+}
+
+message NotificationSubscriptions {
+  repeated Subscription subscriptions = 1;
+}
+
+message UpdateResearcherNotificationSubscriptionsReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  repeated Subscription subscriptions = 3;
+}
+
+message GetResearcherNotificationSubscriptionsReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
 }
 
 message DeleteParticipantFilesReq {
