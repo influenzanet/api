@@ -42,6 +42,7 @@ message SendMessageToAllUsersReq {
   influenzanet.shared.TokenInfos token = 1;
   EmailTemplate template = 2;
   bool ignore_weekday = 3;
+  string label = 4; // short description to describe intent of the message, if empty a default label is used
 }
 
 message SendMessageToStudyParticipantsReq {
@@ -50,6 +51,7 @@ message SendMessageToStudyParticipantsReq {
   string study_key = 3;
   ExpressionArg condition = 4;
   bool ignore_weekday = 5;
+  string label = 6; // short description to describe intent of the message, if empty a default label is used
 }
 
 message SendEmailReq {
