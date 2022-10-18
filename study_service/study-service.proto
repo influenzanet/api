@@ -66,9 +66,14 @@ service StudyServiceApi {
   rpc SaveStudyRules(StudyRulesReq) returns (Study);
   rpc SaveStudyStatus(StudyStatusReq) returns (Study);
   rpc SaveStudyProps(StudyPropsReq) returns (Study);
+
   rpc SaveSurveyToStudy(AddSurveyReq) returns (Survey);
-  rpc GetSurveyDefForStudy(SurveyReferenceRequest) returns (Survey);
-  rpc RemoveSurveyFromStudy(SurveyReferenceRequest) returns (ServiceStatus);
+  rpc GetSurveyVersionInfos(SurveyReferenceRequest) returns (SurveyVersions);
+  rpc GetSurveyKeys(GetSurveyKeysRequest) returns (SurveyKeys);
+  rpc GetSurveyDefForStudy(SurveyVersionReferenceRequest) returns (Survey); // to get one survey definition (latest or specific version id)
+  rpc RemoveSurveyVersion(SurveyVersionReferenceRequest) returns (ServiceStatus); // remove one specific key and version id
+  rpc UnpublishSurvey(SurveyReferenceRequest) returns (ServiceStatus); // unpublish survey by survey key
+
   rpc DeleteStudy(StudyReferenceReq) returns (ServiceStatus);
 
   rpc RunRules(StudyRulesReq) returns (RuleRunSummary);
@@ -322,6 +327,10 @@ message LeaveStudyMsg {
   string profile_id = 3;
 }
 
+message SurveyVersions {
+  repeated Survey survey_versions = 1;
+}
+
 message SurveyReferenceRequest {
   string instance_id = 1;
   string study_key = 2;
@@ -329,6 +338,23 @@ message SurveyReferenceRequest {
   string profile_id = 4;
   influenzanet.shared.TokenInfos token = 5;
   string temporary_participant_id = 6;
+}
+
+message SurveyVersionReferenceRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string survey_key = 3;
+  string version_id = 4;
+}
+
+message GetSurveyKeysRequest {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  bool include_unpublished = 3;
+}
+
+message SurveyKeys {
+  repeated string keys = 1;
 }
 
 message CreateReportReq {

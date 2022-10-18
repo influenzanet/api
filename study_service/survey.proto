@@ -29,26 +29,24 @@ message Survey {
   }
 
   Props props = 2;
-  SurveyVersion current = 3;
-  repeated SurveyVersion history = 4;
+  int64 published = 3;
+  int64 unpublished = 4;
 
   repeated Expression prefill_rules = 5;
   SurveyContextDef context_rules = 6;
   MaxItemsPerPage max_items_per_page = 7;
   string available_for = 8; // public, temporary_participants, active_participants
   bool require_login_before_submission = 9;
+
+
+  SurveyItem survey_definition = 10;
+  string version_id = 11;
+  map<string, string> metadata = 12;
 }
 
 message MaxItemsPerPage {
   int32 large = 1;
   int32 small = 2;
-}
-
-message SurveyVersion {
-  int64 published = 1;
-  int64 unpublished = 2;
-  SurveyItem survey_definition = 3;
-  string version_id = 4;
 }
 
 message SpecialMode {
@@ -62,16 +60,16 @@ message SurveyItem {
   repeated string follows = 3;
   Expression condition = 4;
   float priority = 5;
-  int32 version = 6;
-  repeated string version_tags = 7;
+  map<string, string> metadata = 6;
+
   // Question group attributes ->
-  repeated SurveyItem items = 8;
-  Expression selection_method = 9;
+  repeated SurveyItem items = 7;
+  Expression selection_method = 8;
   // Question attributes ->
-  string type = 10;              // item/question type
-  ItemComponent components = 11; // is a group component
-  repeated Validation validations = 12;
-  string confidential_mode = 13; // "": not confidential, "add" / "replace"
+  string type = 9;              // item/question type
+  ItemComponent components = 10; // is a group component
+  repeated Validation validations = 11;
+  string confidential_mode = 12; // "": not confidential, "add" / "replace"
 }
 
 message Validation {
