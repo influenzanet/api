@@ -11,7 +11,6 @@ message Chunk {
 message ResponseExportQuery {
     message IncludeMeta {
         bool position = 1;
-        bool item_version = 2;
         bool init_times = 3;
         bool displayed_times = 4;
         bool responsed_times = 5;

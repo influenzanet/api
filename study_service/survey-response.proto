@@ -38,7 +38,6 @@ message ResponseItem {
 message ResponseMeta {
   int32 position = 1;
   string locale_code = 2;
-  int32 version = 3;
   // timestamps:
   repeated int64 rendered = 4;
   repeated int64 displayed = 5;
