@@ -73,6 +73,7 @@ message AutoMessage {
   int64 next_time = 6; // when is the next time the message should be triggered
   int64 period = 7;    // how often it should be triggered
   string label = 8; // short description to describe intent of the message
+  int64 until = 9; // optional value, after this the auto-message will be deleted
 }
 
 message AutoMessages { repeated AutoMessage auto_messages = 1; }
