@@ -24,6 +24,7 @@ service StudyServiceApi {
   rpc GetAssignedSurvey(SurveyReferenceRequest) returns (SurveyAndContext);
   rpc SubmitResponse(SubmitResponseReq) returns (AssignedSurveys);
   rpc LeaveStudy(LeaveStudyMsg) returns (AssignedSurveys);
+  rpc ProfileDeleted(influenzanet.shared.TokenInfos) returns (ServiceStatus);
   rpc DeleteParticipantData(influenzanet.shared.TokenInfos)
       returns (ServiceStatus);
   rpc UploadParticipantFile(stream UploadParticipantFileReq) returns (FileInfo);
