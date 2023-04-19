@@ -64,6 +64,7 @@ service StudyServiceApi {
   rpc RemoveStudyMember(StudyMemberReq) returns (Study);
   rpc GetResearcherNotificationSubscriptions(GetResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
   rpc UpdateResearcherNotificationSubscriptions(UpdateResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
+  rpc GetStudiesWithPendingParticipantMessages(GetStudiesWithPendingParticipantMessagesReq) returns (Studies);
   rpc SaveStudyRules(StudyRulesReq) returns (Study);
   rpc SaveStudyStatus(StudyStatusReq) returns (Study);
   rpc SaveStudyProps(StudyPropsReq) returns (Study);
@@ -239,6 +240,10 @@ message GetParticipantMessagesReq {
 }
 
 message GetReseacherMessagesReq {
+  string instance_id = 1;
+}
+
+message GetStudiesWithPendingParticipantMessagesReq {
   string instance_id = 1;
 }
 
