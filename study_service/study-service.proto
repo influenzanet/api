@@ -87,6 +87,7 @@ service StudyServiceApi {
       returns (StudyResponseStatistics);
   rpc StreamStudyResponses(SurveyResponseQuery) returns (stream SurveyResponse);
   rpc StreamParticipantStates(ParticipantStateQuery) returns (stream ParticipantState);
+  rpc GetParticipantStateByID(ParticipantStateByIDQuery) returns (ParticipantState);
   rpc StreamReportHistory(ReportHistoryQuery) returns (stream Report);
   rpc StreamParticipantFileInfos(FileInfoQuery) returns (stream FileInfo);
 
@@ -218,6 +219,12 @@ message ParticipantStateQuery {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
   string status = 3;
+}
+
+message ParticipantStateByIDQuery {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  string participant_id = 3;
 }
 
 message StudyResponseStatistics {
