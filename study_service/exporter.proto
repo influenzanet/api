@@ -35,6 +35,9 @@ message ResponseExportQuery {
     bool short_question_keys = 7;
     string separator = 8;
     ItemFilter item_filter = 9;
+
+    int32 page = 10;
+    int32 page_size = 11;
 }
 
 message SurveyInfoExportQuery {
