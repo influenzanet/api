@@ -78,3 +78,15 @@ message AssignedSurveys {
   repeated AssignedSurvey surveys = 1;
   repeated SurveyInfo survey_infos = 2;
 }
+
+message StudyRules {
+  string id = 1;  // db id
+  string study_key = 2;
+  repeated Expression rules = 3;
+  int64 uploaded_at = 4;
+  string uploaded_by = 5;
+}
+
+message StudyRulesHistory {
+  repeated StudyRules rules = 1;
+}

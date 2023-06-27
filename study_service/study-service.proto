@@ -65,9 +65,11 @@ service StudyServiceApi {
   rpc GetResearcherNotificationSubscriptions(GetResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
   rpc UpdateResearcherNotificationSubscriptions(UpdateResearcherNotificationSubscriptionsReq) returns (NotificationSubscriptions);
   rpc GetStudiesWithPendingParticipantMessages(GetStudiesWithPendingParticipantMessagesReq) returns (Studies);
-  rpc SaveStudyRules(StudyRulesReq) returns (Study);
   rpc SaveStudyStatus(StudyStatusReq) returns (Study);
   rpc SaveStudyProps(StudyPropsReq) returns (Study);
+  rpc SaveStudyRules(StudyRulesReq) returns (Study);
+  rpc GetCurrentStudyRules(StudyReferenceReq) returns (StudyRules);
+  rpc GetStudyRulesHistory(StudyRulesHistoryReq) returns (StudyRulesHistory);
 
   rpc SaveSurveyToStudy(AddSurveyReq) returns (Survey);
   rpc GetSurveyVersionInfos(SurveyReferenceRequest) returns (SurveyVersions);
@@ -323,6 +325,16 @@ message SurveyAndContext {
 message StudyReferenceReq {
   influenzanet.shared.TokenInfos token = 1;
   string study_key = 2;
+}
+
+message StudyRulesHistoryReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  int64 since = 3;
+  int64 until = 4;
+  int32 page_size = 5;
+  int32 page = 6;
+  bool descending = 7;
 }
 
 message SurveyInfoResp { repeated SurveyInfo infos = 1; }
