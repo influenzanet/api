@@ -269,4 +269,5 @@ message TokenResponse {
   repeated inf.user.Profile profiles = 4;
   string selected_profile_id = 5;
   string preferred_language = 6;
+  bool account_confirmed = 7;
 }
