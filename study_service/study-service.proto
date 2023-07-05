@@ -70,6 +70,7 @@ service StudyServiceApi {
   rpc SaveStudyRules(StudyRulesReq) returns (Study);
   rpc GetCurrentStudyRules(StudyReferenceReq) returns (StudyRules);
   rpc GetStudyRulesHistory(StudyRulesHistoryReq) returns (StudyRulesHistory);
+  rpc RemoveStudyRulesVersion(StudyRulesVersionReferenceReq) returns (ServiceStatus);
 
   rpc SaveSurveyToStudy(AddSurveyReq) returns (Survey);
   rpc GetSurveyVersionInfos(SurveyReferenceRequest) returns (SurveyVersions);
@@ -380,6 +381,11 @@ message SurveyReferenceRequest {
   string profile_id = 4;
   influenzanet.shared.TokenInfos token = 5;
   string temporary_participant_id = 6;
+}
+
+message StudyRulesVersionReferenceReq {
+  influenzanet.shared.TokenInfos token = 1;
+  string id = 2;
 }
 
 message SurveyVersionReferenceRequest {
