@@ -245,6 +245,7 @@ message ParticipantStatesWithPagination {
   int32 page_count = 2;
   int32 page = 3;
   repeated ParticipantState items = 4;
+  int32 page_size = 5;
 }
 
 message StudyResponseStatistics {

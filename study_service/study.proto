@@ -92,4 +92,5 @@ message StudyRulesHistory {
   int32 item_count = 2;
   int32 page_count = 3;
   int32 page = 4;
+  int32 page_size = 5;
 }
