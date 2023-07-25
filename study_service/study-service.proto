@@ -99,6 +99,7 @@ service StudyServiceApi {
   rpc GetResponsesWideFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesLongFormatCSV(ResponseExportQuery) returns (stream Chunk);
   rpc GetResponsesFlatJSON(ResponseExportQuery) returns (stream Chunk);
+  rpc GetResponsesFlatJSONWithPagination(ResponseExportQuery) returns (stream PaginatedFile);
   rpc GetSurveyInfoPreviewCSV(SurveyInfoExportQuery) returns (stream Chunk);
   rpc GetSurveyInfoPreview(SurveyInfoExportQuery) returns (SurveyInfoExport);
 }
@@ -130,6 +131,20 @@ message UploadParticipantFileReq {
     Info info = 1;
     bytes chunk = 2;
   }
+}
+
+message PaginatedFile {
+  oneof data {
+    PaginationInfo info = 1;
+    bytes chunk = 2;
+  }
+}
+
+message PaginationInfo {
+  int32 item_count = 1;
+  int32 page_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
 }
 
 message GetParticipantFileReq {
