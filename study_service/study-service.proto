@@ -83,6 +83,7 @@ service StudyServiceApi {
 
   rpc RunRules(StudyRulesReq) returns (RuleRunSummary);
   rpc RunRulesForSingleParticipant(RunRulesForSingleParticipantReq) returns (RuleRunSummary);
+  rpc RunRulesForPreviousResponses(RunRulesForPreviousResponsesReq) returns (RuleRunSummary);
   // <---
 
   // Data access:
@@ -468,6 +469,21 @@ message RunRulesForSingleParticipantReq {
   string study_key = 2;
   string participant_id = 3;
   repeated Expression rules = 4;
+}
+
+message RunRulesForPreviousResponsesReq {
+  message ResponseFilter {
+    repeated string survey_keys = 1;
+    repeated string participant_ids = 2;
+    repeated string participant_status = 3;
+    int64 from = 4;
+    int64 until = 5;
+  }
+
+  influenzanet.shared.TokenInfos token = 1;
+  string study_key = 2;
+  repeated Expression rules = 3;
+  ResponseFilter filter = 4;
 }
 
 message StudyStatusReq {
