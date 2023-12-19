@@ -10,6 +10,7 @@ service MessagingServiceApi {
   rpc Status(google.protobuf.Empty) returns (ServiceStatus);
 
   rpc SendInstantEmail(SendEmailReq) returns (ServiceStatus);
+  rpc QueueEmailTemplateForSending(SendEmailReq) returns (ServiceStatus);
   rpc SendMessageToAllUsers(SendMessageToAllUsersReq) returns (ServiceStatus);
   rpc SendMessageToStudyParticipants(SendMessageToStudyParticipantsReq)
       returns (ServiceStatus);
