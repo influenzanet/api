@@ -25,6 +25,7 @@ message SurveyItemResponse {
   // for single items:
   ResponseItem response = 4;
   string confidential_mode = 5;
+  string map_to_key = 6;
 }
 
 message ResponseItem {

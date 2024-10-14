@@ -70,6 +70,7 @@ message SurveyItem {
   ItemComponent components = 10; // is a group component
   repeated Validation validations = 11;
   string confidential_mode = 12; // "": not confidential, "add" / "replace"
+  string map_to_key = 13;
 }
 
 message Validation {
