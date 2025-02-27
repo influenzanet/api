@@ -94,6 +94,7 @@ message SignupWithEmailMsg {
   bool wants_newsletter = 5;
   bool use_2fa = 6;
   string info_check = 7;
+  string phone = 8;
 }
 
 message LoginWithEmailMsg {
