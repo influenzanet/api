@@ -45,6 +45,8 @@ service UserManagementApi {
   rpc ChangeAccountIDEmail(EmailChangeMsg) returns (inf.user.User);
   rpc DeleteAccount(UserReference) returns (ServiceStatus);
   rpc ChangePreferredLanguage(LanguageChangeMsg) returns (inf.user.User);
+  rpc DeletePhoneNumber(influenzanet.shared.TokenInfos) returns (google.protobuf.Empty);
+
 
   // PW reset:
   rpc InitiatePasswordReset(InitiateResetPasswordMsg) returns (ServiceStatus);
