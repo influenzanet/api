@@ -62,7 +62,7 @@ service UserManagementApi {
   rpc UpdateContactPreferences(ContactPreferencesMsg) returns (inf.user.User);
   rpc AddEmail(ContactInfoMsg) returns (inf.user.User);
   rpc RemoveEmail(ContactInfoMsg) returns (inf.user.User);
-  rpc AddPhoneNumber(ContactInfoMsg) returns (inf.user.User);
+  rpc AddPhoneNumber(PhoneMsg) returns (inf.user.User);
 
   // Management Methods:
   rpc CreateUser(CreateUserReq) returns (inf.user.User);
@@ -272,4 +272,9 @@ message TokenResponse {
   string selected_profile_id = 5;
   string preferred_language = 6;
   bool account_confirmed = 7;
+}
+
+message PhoneMsg {
+  influenzanet.shared.TokenInfos token = 1;
+  string new_phone = 2;
 }
