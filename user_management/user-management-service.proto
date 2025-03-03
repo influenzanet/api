@@ -63,6 +63,7 @@ service UserManagementApi {
   rpc AddEmail(ContactInfoMsg) returns (inf.user.User);
   rpc RemoveEmail(ContactInfoMsg) returns (inf.user.User);
   rpc AddPhoneNumber(PhoneMsg) returns (inf.user.User);
+  rpc EditPhoneNumber(PhoneMsg) returns (inf.user.User);
 
   // Management Methods:
   rpc CreateUser(CreateUserReq) returns (inf.user.User);
