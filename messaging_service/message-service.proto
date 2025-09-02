@@ -8,6 +8,9 @@ import "shared/auth_info.proto";
 
 service MessagingServiceApi {
   rpc Status(google.protobuf.Empty) returns (ServiceStatus);
+  // NEW METHOD FOR NOTIFICATIONS
+  rpc SendNotification(SendNotificationReq) returns (ServiceStatus);
+  // ------------------------------------
 
   rpc SendInstantEmail(SendEmailReq) returns (ServiceStatus);
   rpc QueueEmailTemplateForSending(SendEmailReq) returns (ServiceStatus);
@@ -23,6 +26,18 @@ service MessagingServiceApi {
   rpc SaveEmailTemplate(SaveEmailTemplateReq) returns (EmailTemplate);
   rpc DeleteEmailTemplate(DeleteEmailTemplateReq) returns (ServiceStatus);
 }
+
+// NEW MESSAGES FOR NOTIFICATIONS
+message SendNotificationReq {
+    string instance_id = 1;
+    string user_id = 2;
+    string message_type = 3;                 // template identifier
+    map<string, string> content_params = 4; // for template population
+}
+
+message ContactPreferencesResponse {
+// ------------------------------------
+
 
 /*
  * Status is typically used as a return value indicating if the method was
@@ -43,7 +58,7 @@ message SendMessageToAllUsersReq {
   influenzanet.shared.TokenInfos token = 1;
   EmailTemplate template = 2;
   bool ignore_weekday = 3;
-  string label = 4; // short description to describe intent of the message, if empty a default label is used
+  string label = 4; // short description for message intent, default if empty
 }
 
 message SendMessageToStudyParticipantsReq {
@@ -52,7 +67,7 @@ message SendMessageToStudyParticipantsReq {
   string study_key = 3;
   ExpressionArg condition = 4;
   bool ignore_weekday = 5;
-  string label = 6; // short description to describe intent of the message, if empty a default label is used
+  string label = 6; // short description for message intent, default if empty
 }
 
 message SendEmailReq {
