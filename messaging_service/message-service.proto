@@ -35,10 +35,6 @@ message SendNotificationReq {
     map<string, string> content_params = 4; // for template population
 }
 
-message ContactPreferencesResponse {
-// ------------------------------------
-
-
 /*
  * Status is typically used as a return value indicating if the method was
  * performed normally, or the system has any internal error e.g. checking system
