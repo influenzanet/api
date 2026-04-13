@@ -8,9 +8,6 @@ import "shared/auth_info.proto";
 
 service MessagingServiceApi {
   rpc Status(google.protobuf.Empty) returns (ServiceStatus);
-  // NEW METHOD FOR NOTIFICATIONS
-  rpc SendNotification(SendNotificationReq) returns (ServiceStatus);
-  // ------------------------------------
 
   rpc SendInstantEmail(SendEmailReq) returns (ServiceStatus);
   rpc QueueEmailTemplateForSending(SendEmailReq) returns (ServiceStatus);
@@ -25,14 +22,6 @@ service MessagingServiceApi {
   rpc GetEmailTemplates(GetEmailTemplatesReq) returns (EmailTemplates);
   rpc SaveEmailTemplate(SaveEmailTemplateReq) returns (EmailTemplate);
   rpc DeleteEmailTemplate(DeleteEmailTemplateReq) returns (ServiceStatus);
-}
-
-// NEW MESSAGES FOR NOTIFICATIONS
-message SendNotificationReq {
-    string instance_id = 1;
-    string user_id = 2;
-    string message_type = 3;                 // template identifier
-    map<string, string> content_params = 4; // for template population
 }
 
 /*
