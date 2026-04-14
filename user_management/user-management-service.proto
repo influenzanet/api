@@ -64,7 +64,8 @@ service UserManagementApi {
   // Contacts:
   rpc UseUnsubscribeToken(TempToken) returns (ServiceStatus);
   rpc UpdateContactPreferences(ContactPreferencesMsg) returns (inf.user.User);
-  rpc GetUserContactPreferences(UserReference) returns (ContactPreferencesResponse);
+  // Deprecated: no callers. Use StreamUsers or GetUser and read ContactInfos + NotificationChannels.
+  rpc GetUserContactPreferences(UserReference) returns (ContactPreferencesResponse) { option deprecated = true; };
   rpc AddEmail(ContactInfoMsg) returns (inf.user.User);
   rpc RemoveEmail(ContactInfoMsg) returns (inf.user.User);
   rpc AddPhoneNumber(PhoneMsg) returns (inf.user.User);
@@ -286,11 +287,12 @@ message TokenResponse {
   bool account_confirmed = 7;
 }
 
+// Deprecated: used only by GetUserContactPreferences which has no callers.
 message ContactPreferencesResponse {
     string user_id = 1;
     string email = 2;
     string phone_number = 3;
-    repeated string preferred_channels = 4; 
+    repeated string preferred_channels = 4;
 }
 
 message SendMessageRequest {
