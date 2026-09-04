@@ -97,6 +97,13 @@ message EmailTemplate {
   string default_language = 4;
   repeated LocalizedTemplate translations = 5;
   HeaderOverrides header_overrides = 6;
+  // Binding to the WhatsApp template this message is delivered with. Both fields are
+  // optional: whatsapp_template_name carries explicit presence, so a client that omits it
+  // asks the server to keep the binding already stored, while sending it empty clears the
+  // binding together with its parameters.
+  optional string whatsapp_template_name = 7;
+  // Maps a parameter of the Meta template to the content key that fills it.
+  map<string, string> whatsapp_params = 8;
 }
 
 message HeaderOverrides {
