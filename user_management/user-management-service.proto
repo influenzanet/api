@@ -79,6 +79,9 @@ service UserManagementApi {
   rpc FindNonParticipantUsers(FindNonParticipantUsersMsg) returns (UserListMsg);
   rpc StreamUsers(StreamUsersMsg) returns (stream inf.user.User);
 
+  // Public: which optional features are on for an instance, so the participant
+  // site follows the backend configuration. Carries no user data.
+  rpc GetPlatformConfig(PlatformConfigReq) returns (PlatformConfig);
 }
 
 /*
@@ -301,4 +304,12 @@ message PhoneMsg {
 message VerifyWhatsAppCodeReq {
   influenzanet.shared.TokenInfos token = 1;
   string code = 2;
+}
+
+message PlatformConfigReq {
+  string instance_id = 1;
+}
+
+message PlatformConfig {
+  bool whatsapp_enabled = 1;
 }
