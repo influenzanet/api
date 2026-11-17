@@ -64,13 +64,14 @@ service UserManagementApi {
   // Contacts:
   rpc UseUnsubscribeToken(TempToken) returns (ServiceStatus);
   rpc UpdateContactPreferences(ContactPreferencesMsg) returns (inf.user.User);
-  // Deprecated: no callers. Use StreamUsers or GetUser and read ContactInfos + NotificationChannels.
-  rpc GetUserContactPreferences(UserReference) returns (ContactPreferencesResponse) { option deprecated = true; };
   rpc AddEmail(ContactInfoMsg) returns (inf.user.User);
   rpc RemoveEmail(ContactInfoMsg) returns (inf.user.User);
   rpc AddPhoneNumber(PhoneMsg) returns (inf.user.User);
   rpc EditPhoneNumber(PhoneMsg) returns (inf.user.User);
   rpc VerifyWhatsAppCode(VerifyWhatsAppCodeReq) returns (inf.user.User);
+  // Service to service: removes WhatsApp from the participant's notification channels after
+  // an opt-out that arrived through WhatsApp itself. It never adds e-mail.
+  rpc RemoveWhatsAppChannel(RemoveWhatsAppChannelReq) returns (RemoveWhatsAppChannelResp);
 
   // Management Methods:
   rpc CreateUser(CreateUserReq) returns (inf.user.User);
@@ -288,14 +289,6 @@ message TokenResponse {
   bool account_confirmed = 7;
 }
 
-// Deprecated: used only by GetUserContactPreferences which has no callers.
-message ContactPreferencesResponse {
-    string user_id = 1;
-    string email = 2;
-    string phone_number = 3;
-    repeated string preferred_channels = 4;
-}
-
 message PhoneMsg {
   influenzanet.shared.TokenInfos token = 1;
   string new_phone = 2;
@@ -312,4 +305,30 @@ message PlatformConfigReq {
 
 message PlatformConfig {
   bool whatsapp_enabled = 1;
+}
+
+// Why WhatsApp is removed from a participant's channels without their acting in the settings.
+enum WhatsAppRemovalReason {
+  WHATSAPP_REMOVAL_REASON_UNSPECIFIED = 0;
+  // The participant replied with a stop keyword.
+  WHATSAPP_REMOVAL_REASON_STOP_KEYWORD = 1;
+  // Meta reported the number as not on WhatsApp or unreachable (error 131026).
+  WHATSAPP_REMOVAL_REASON_UNDELIVERABLE = 2;
+}
+
+message RemoveWhatsAppChannelReq {
+  string instance_id = 1;
+  // The participant: by account, when the caller knows it (a status of a message sent to
+  // them), or by the phone number a message came from, which user-management resolves to the
+  // account that holds it verified.
+  oneof target {
+    string user_id = 2;
+    string phone_number = 3;
+  }
+  WhatsAppRemovalReason reason = 4;
+}
+
+message RemoveWhatsAppChannelResp {
+  // False when no account matched, or WhatsApp was not among its channels.
+  bool channel_removed = 1;
 }

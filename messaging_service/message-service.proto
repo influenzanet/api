@@ -22,6 +22,10 @@ service MessagingServiceApi {
   rpc GetEmailTemplates(GetEmailTemplatesReq) returns (EmailTemplates);
   rpc SaveEmailTemplate(SaveEmailTemplateReq) returns (EmailTemplate);
   rpc DeleteEmailTemplate(DeleteEmailTemplateReq) returns (ServiceStatus);
+
+  // Service to service: called by user-management whenever a participant withdraws WhatsApp.
+  rpc DeleteOutgoingWhatsAppForUser(DeleteOutgoingWhatsAppForUserReq)
+      returns (DeleteOutgoingWhatsAppForUserResp);
 }
 
 /*
@@ -147,4 +151,23 @@ message ExpressionArg {
     string str = 3;
     double num = 4;
   }
+}
+
+// Removes the WhatsApp messages queued for one participant. Repeating a call is harmless, so
+// the caller may retry it.
+message DeleteOutgoingWhatsAppForUserReq {
+  string instance_id = 1;
+  string user_id = 2;
+  // Message types to cancel; empty means every type.
+  repeated string message_types = 3;
+  // Account deletion: delete the queued messages without archiving them, together with every
+  // archived message of the participant. message_types must then be empty.
+  bool purge_archive = 4;
+}
+
+message DeleteOutgoingWhatsAppForUserResp {
+  // Queued messages taken out of the queue.
+  int64 removed_from_queue = 1;
+  // Archived messages deleted (purge_archive only).
+  int64 removed_from_archive = 2;
 }
