@@ -26,6 +26,14 @@ service MessagingServiceApi {
   // Service to service: called by user-management whenever a participant withdraws WhatsApp.
   rpc DeleteOutgoingWhatsAppForUser(DeleteOutgoingWhatsAppForUserReq)
       returns (DeleteOutgoingWhatsAppForUserResp);
+
+  // Service to service: called by the gateway with the body of a WhatsApp webhook request whose
+  // signature it has checked. The delivery statuses and the replies in it are processed before
+  // the call returns, and processing the same body again changes nothing. Errors:
+  // InvalidArgument, not a webhook payload (delivering it again cannot help); FailedPrecondition,
+  // the webhook is not configured here; Unavailable, part of it could not be processed yet. On
+  // the last two the gateway answers Meta with an error, so that Meta sends the body again.
+  rpc ProcessWhatsAppWebhook(ProcessWhatsAppWebhookReq) returns (google.protobuf.Empty);
 }
 
 /*
@@ -170,4 +178,9 @@ message DeleteOutgoingWhatsAppForUserResp {
   int64 removed_from_queue = 1;
   // Archived messages deleted (purge_archive only).
   int64 removed_from_archive = 2;
+}
+
+message ProcessWhatsAppWebhookReq {
+  // The request body exactly as Meta sent it: the bytes the signature was computed on.
+  bytes payload = 1;
 }
