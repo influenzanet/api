@@ -62,7 +62,12 @@ service UserManagementApi {
   rpc RemoveProfile(ProfileRequest) returns (inf.user.User);
 
   // Contacts:
+  // Newsletter only; kept for existing callers. UnsubscribeWithToken does the same for any
+  // subscription.
   rpc UseUnsubscribeToken(TempToken) returns (ServiceStatus);
+  // Turns one subscription off with the participant's unsubscribe token, the one in the links of
+  // the messages, without a login.
+  rpc UnsubscribeWithToken(UnsubscribeWithTokenReq) returns (ServiceStatus);
   rpc UpdateContactPreferences(ContactPreferencesMsg) returns (inf.user.User);
   rpc AddEmail(ContactInfoMsg) returns (inf.user.User);
   rpc RemoveEmail(ContactInfoMsg) returns (inf.user.User);
@@ -278,6 +283,18 @@ message FindNonParticipantUsersMsg { influenzanet.shared.TokenInfos token = 1; }
 message UserListMsg { repeated inf.user.User users = 1; }
 
 message TempToken { string token = 1; }
+
+// A subscription a participant can turn off from a message.
+enum Subscription {
+  SUBSCRIPTION_UNSPECIFIED = 0;
+  SUBSCRIPTION_NEWSLETTER = 1;
+  SUBSCRIPTION_WEEKLY = 2;
+}
+
+message UnsubscribeWithTokenReq {
+  string token = 1;
+  Subscription subscription = 2;
+}
 
 message TokenResponse {
   string access_token = 1;
